@@ -1,49 +1,27 @@
 .header {
-  margin: 0;
-  padding: 0;
-  /* box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
   width: 100%;
-  max-width: 288px;
-
+  border-bottom: 1px solid #545454;
   display: flex;
-  justify-content: space-between; */
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-/* @media screen and (min-width: 321px) {
-  .header {
-    max-width: 95%;
-  }
-} */
 
-
-/* @media screen and (width: 768px) {
+/* плавное появление отступа слева у логотипа */
+/* 27px + 880px + 27px = 934px*/
+@media screen and (max-width: 934px) {
   .header {
-    max-width: 720px;
+    padding-left: calc((934px - 100vw)/2); /* от 0 до 27 */
   }
 }
 
-@media screen and (min-width: 769px) {
+@media screen and (max-width: 880px) {
   .header {
-    max-width: 92%;
+    padding-left: 27px;
   }
 }
-
-@media screen and (width: 1024px) {
-  .header {
-    max-width: 928px;
-  }
-}
-
-@media screen and (min-width: 1025px) {
-  .header {
-    max-width: 92%;
-  }
-}
-
-@media screen and (min-width: 1280px) {
-  .header {
-    max-width: 1184px;
-  }
-} */

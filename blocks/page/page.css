@@ -1,0 +1,11 @@
+.page {
+  margin: 0;
+  padding: 0;
+  background-color: #000;
+  box-sizing: border-box; /* без этого по краям бортики белые */
+
+  font-family: 'Inter', Arial, sans-serif;
+  color: #FFF;
+}
+
+

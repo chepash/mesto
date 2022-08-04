@@ -1,0 +1,25 @@
+@import url(../vendor/normalize.css);
+@import url(../vendor/fonts/fonts.css);
+
+@import url(../blocks/page/page.css);
+
+
+@import url(../blocks/header/header.css);
+@import url(../blocks/header/__logo/logo.css);
+
+@import url(../blocks/content/content.css);
+
+@import url(../blocks/content/content.css);
+
+
+@import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__copyright/footer__copyright.css);
+
+@import url(../blocks/section/section.css); /*box-sizing: border-box*/
+
+
+/* миксы */
+@import url(../blocks/page/__container/page__container.css); /* min-max width нашего сайта*/
+@import url(../blocks/page/__content/page__content.css); /* микс отступа блока content от header и от footer */
+@import url(../blocks/page/__list/page__list.css); /*перопредеяем стили всех возможных списков*/
+@import url(../blocks/content/__section/content__section.css); /*оцентровка и ширина 100% секций внутри блока content*/

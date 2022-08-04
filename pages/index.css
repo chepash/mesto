@@ -22,4 +22,4 @@
 @import url(../blocks/page/__container/page__container.css); /* min-max width нашего сайта*/
 @import url(../blocks/page/__content/page__content.css); /* микс отступа блока content от header и от footer */
 @import url(../blocks/page/__list/page__list.css); /*перопредеяем стили всех возможных списков*/
-@import url(../blocks/content/__section/content__section.css); /*оцентровка и ширина 100% секций внутри блока content*/
+@import url(../blocks/content/__section/content__section.css); /*оцентровка и ширина 100% секций внутри блока content */

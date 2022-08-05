@@ -4,17 +4,3 @@
   box-sizing: border-box;
 }
 
-/* плавное появление отступов по бокам */
-/* 19px + 880px + 19px = 918px*/
-@media screen and (max-width: 918px) {
-  .section {
-    padding-left: calc((918px - 100vw)/2); /* от 0 до 19 */
-  }
-}
-
-@media screen and (max-width: 880px) {
-  .section {
-    padding-left: 19px;
-    padding-right: 19px;
-  }
-}

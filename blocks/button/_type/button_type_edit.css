@@ -1,0 +1,24 @@
+.button_type_edit {
+  width: 24px;
+  height: 24px;
+  background-color: #000;
+  border: 1px solid #fff;
+
+
+  align-self: center;
+  grid-column-start: 3;
+}
+
+@media screen and (max-width: 768px) {
+  .button_type_edit {
+    width: 21px;
+    height: 21px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .button_type_edit {
+    width: 18px;
+    height: 18px;
+  }
+}

@@ -5,6 +5,7 @@
   box-sizing: border-box; /* без этого по краям бортики белые */
 
   font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
   color: #FFF;
 }
 

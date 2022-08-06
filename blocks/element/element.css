@@ -1,0 +1,14 @@
+.element {
+  background-color: #fff;
+  border-radius: 10px;
+
+  width: 100%;
+  min-width: 282px;
+  height: 100%;
+  min-height: 361px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+

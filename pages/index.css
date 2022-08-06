@@ -15,16 +15,22 @@
   @import url(../blocks/profile/__name/profile__name.css);
   @import url(../blocks/profile/__occupation/profile__occupation.css);
 
+  @import url(../blocks/elements/elements.css);
+  @import url(../blocks/elements/__list/elements__list.css);
 
-
+    @import url(../blocks/element/element.css);
+    @import url(../blocks/element/__image/element__image.css);
+    @import url(../blocks/element/__footer/element__footer.css);
+    @import url(../blocks/element/__caption/element__caption.css);
 
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 
+/* кнопки */
 @import url(../blocks/button/button.css);
 @import url(../blocks/button/_type/button_type_edit.css);
 @import url(../blocks/button/_type/button_type_add.css);
-
+@import url(../blocks/button/_type/button_type_like.css);
 
 @import url(../blocks/section/section.css); /*box-sizing: border-box*/
 @import url(../blocks/section/_size/section_size_narrow.css); /* плавное появление боковых отступов 19px у всех секций кроме header */

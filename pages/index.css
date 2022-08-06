@@ -55,11 +55,3 @@
 @import url(../blocks/page/__list/page__list.css); /*переопредеяем стили всех возможных списков*/
 @import url(../blocks/content/__section/content__section.css); /*оцентровка и ширина 100% секций внутри блока content */
 
-
-/* .scroll {
-  min-height: 800px;
-} */
-
-/* * {
-  outline: 1px solid red;
-  } */

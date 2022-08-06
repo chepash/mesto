@@ -7,7 +7,9 @@
 
   background-color: rgba(0, 0, 0, 0.5);
 
-  display: grid;
+  display: none;
+  /* хочется грид с 3 колонками чтобы оцентровать и положить крестик в угол
+  без лишних обёрток и отрицательных отсупов */
   grid-template-columns: 32px min-content min-content;
   grid-template-rows: min-content min-content;
   column-gap: 8px;

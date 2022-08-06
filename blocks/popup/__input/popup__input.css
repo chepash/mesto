@@ -21,3 +21,8 @@
   line-height: 1.21;
   color: #000000;
 }
+
+.popup__input:focus {
+  outline: 4px groove #4a84eb80;
+  border-radius: 2px;
+}

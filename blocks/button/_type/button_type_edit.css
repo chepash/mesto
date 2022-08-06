@@ -4,6 +4,11 @@
   background-color: #000;
   border: 1px solid #fff;
 
+  background-image: url("../../../images/button_edit.svg");
+  background-size: 10px;
+  background-position: center;
+  background-repeat: no-repeat;
+
 
   align-self: center;
   grid-column-start: 3;

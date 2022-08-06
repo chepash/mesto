@@ -26,11 +26,24 @@
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 
+
+/* popups */
+@import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/_opened/popup_opened.css);
+@import url(../blocks/popup/__close/popup__close.css);
+@import url(../blocks/popup/__container/popup__container.css);
+@import url(../blocks/popup/__title/popup__title.css);
+@import url(../blocks/popup/__input/popup__input.css);
+@import url(../blocks/popup/__input/_type/popup__input_type_profile-name.css);
+@import url(../blocks/popup/__input/_type/popup__input_type_profile-occupation.css);
+
 /* кнопки */
 @import url(../blocks/button/button.css);
 @import url(../blocks/button/_type/button_type_edit.css);
 @import url(../blocks/button/_type/button_type_add.css);
 @import url(../blocks/button/_type/button_type_like.css);
+/* @import url(../blocks/button/_active/button_active.css); заготовка для следующей работы */
+@import url(../blocks/button/_type/button_type_save.css);
 
 /* блок для обнуления стилей и задавания геомерии нектоторым секциям */
 @import url(../blocks/section/section.css); /*box-sizing: border-box*/

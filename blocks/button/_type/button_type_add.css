@@ -7,10 +7,13 @@
   border: 2px solid #FFFFFF;
   border-radius: 2px;
 
+  background-image: url("../../../images/button_add.svg");
+  background-size: 22px;
+  background-position: center;
+  background-repeat: no-repeat;
+
   justify-self: end;
   align-self: center;
-
-  margin-left: 20px;
 }
 
 @media screen and (max-width: 768px) {
@@ -22,6 +25,7 @@
 
 @media screen and (max-width: 540px) {
   .button_type_add {
+    background-size: 16px;
     width: 100%;
     grid-column-start: auto;
   }

@@ -6,3 +6,8 @@
   justify-content: center;
   align-items: center;
 }
+
+.button:hover {
+  transition: opacity 0.2s ease;
+  opacity: 0.6;
+}

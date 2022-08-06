@@ -9,6 +9,8 @@
 
   justify-self: end;
   align-self: center;
+
+  margin-left: 20px;
 }
 
 @media screen and (max-width: 768px) {

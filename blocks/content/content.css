@@ -5,6 +5,8 @@
 
   display: grid;
   row-gap: 50px;
+
+  flex: 1; /* для липкого футера */
 }
 
 @media screen and (max-width: 768px) {

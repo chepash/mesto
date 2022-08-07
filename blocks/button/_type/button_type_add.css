@@ -3,7 +3,7 @@
   height: 50px;
   box-sizing: border-box;
 
-  background-color: #000;
+  background-color: #00000000;   /* прозрачный фон */
   border: 2px solid #FFFFFF;
   border-radius: 2px;
 
@@ -18,7 +18,10 @@
 
 @media screen and (max-width: 768px) {
   .button_type_add {
-    grid-column-start: 2;
+    grid-column-start: 1;
+    grid-column-end: -1;
+    width: 100px;
+    place-self: center;
   }
 }
 
@@ -26,7 +29,5 @@
 @media screen and (max-width: 540px) {
   .button_type_add {
     background-size: 16px;
-    width: 100%;
-    grid-column-start: auto;
   }
 }

@@ -10,10 +10,3 @@
     place-self: end;
   }
 }
-
-@media screen and (max-width: 400px) {
-  .popup__close {
-    max-width: 20px;
-    max-height: 20px;
-  }
-}

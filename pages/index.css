@@ -30,12 +30,10 @@
 /* popups */
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
-@import url(../blocks/popup/__close/popup__close.css);
 @import url(../blocks/popup/__container/popup__container.css);
-@import url(../blocks/popup/__title/popup__title.css);
-@import url(../blocks/popup/__input/popup__input.css);
-@import url(../blocks/popup/__input/_type/popup__input_type_profile-name.css);
-@import url(../blocks/popup/__input/_type/popup__input_type_profile-occupation.css);
+  @import url(../blocks/popup/__title/popup__title.css);
+  @import url(../blocks/popup/__input-container/form__input-container.css);
+    @import url(../blocks/popup/__input/popup__input.css);
 
 /* кнопки */
 @import url(../blocks/button/button.css);
@@ -44,6 +42,7 @@
 @import url(../blocks/button/_type/button_type_like.css);
 /* @import url(../blocks/button/_active/button_active.css); заготовка для следующей работы */
 @import url(../blocks/button/_type/button_type_save.css);
+@import url(../blocks/button/_type/button_type_close.css);
 
 /* блок для обнуления стилей и задавания геомерии нектоторым секциям */
 @import url(../blocks/section/section.css); /*box-sizing: border-box*/
@@ -54,3 +53,4 @@
 @import url(../blocks/page/__content/page__content.css); /*отступ блока content от header и от footer */
 @import url(../blocks/page/__list/page__list.css); /*переопредеяем стили всех возможных списков*/
 @import url(../blocks/content/__section/content__section.css); /*оцентровка и ширина 100% секций внутри блока content */
+@import url(../blocks/popup/__close/popup__close.css); /* позиционирование кнопки close */

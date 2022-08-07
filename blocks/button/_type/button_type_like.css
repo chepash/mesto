@@ -1,7 +1,7 @@
 .button_type_like {
   width: 22px;
   height: 19px;
-  background-color: #fff;
+  background-color: #00000000;   /* прозрачный фон */
   background-image: url("../../../images/button_like.svg");
   background-size: cover;
   border: 0px;

@@ -24,10 +24,10 @@
           <div class="profile__info">
             <p class="profile__name">Жак-Ив Кусто</p>
             <p class="profile__occupation">Исследователь океана</p>
-            <button class="button button_type_edit"></button>
+            <button type="button" aria-label="Редактировать" class="button button_type_edit"></button>
           </div>
 
-          <button class="button button_type_add"></button>
+          <button type="button" class="button button_type_add"></button>
         </section>
 
         <section class="elements section content__section" aria-label="Фотографии">
@@ -36,7 +36,7 @@
               <img src="./images/place_karachevsk.jpg" alt="Карачаевск" class="element__image">
               <div class="element__footer">
                 <p class="element__caption">Карачаевск</p>
-                <button class="button button_type_like"></button>
+                <button type="button" aria-label="Нравится" class="button button_type_like"></button>
               </div>
             </li>
 
@@ -44,7 +44,7 @@
               <img src="./images/place_elbrus.jpg" alt="Гора Эльбрус" class="element__image">
               <div class="element__footer">
                 <p class="element__caption">Гора Эльбрус</p>
-                <button class="button button_type_like"></button>
+                <button type="button" aria-label="Нравится" class="button button_type_like"></button>
               </div>
             </li>
 
@@ -52,7 +52,7 @@
               <img src="./images/place_dombai.jpg" alt="Домбай" class="element__image">
               <div class="element__footer">
                 <p class="element__caption">Домбай</p>
-                <button class="button button_type_like"></button>
+                <button type="button" aria-label="Нравится" class="button button_type_like"></button>
               </div>
             </li>
 
@@ -60,7 +60,7 @@
               <img src="./images/place_elbrus.jpg" alt="Гора Эльбрус" class="element__image">
               <div class="element__footer">
                 <p class="element__caption">Гора Эльбрус</p>
-                <button class="button button_type_like"></button>
+                <button type="button" aria-label="Нравится" class="button button_type_like"></button>
               </div>
             </li>
 
@@ -68,7 +68,7 @@
               <img src="./images/place_dombai2.jpg" alt="Домбай" class="element__image">
               <div class="element__footer">
                 <p class="element__caption">Домбай</p>
-                <button class="button button_type_like"></button>
+                <button type="button" aria-label="Нравится" class="button button_type_like"></button>
               </div>
             </li>
 
@@ -76,7 +76,7 @@
               <img src="./images/place-forest.jpg" alt="Карачаево-Черкеск" class="element__image">
               <div class="element__footer">
                 <p class="element__caption">Карачаево-Черкеск</p>
-                <button class="button button_type_like button_active"></button>
+                <button type="button" aria-label="Нравится" class="button button_type_like button_active"></button>
               </div>
             </li>
           </ul>
@@ -89,11 +89,13 @@
     </div>
 
     <section class="popup section" aria-label="Всплывающее окно: Редактирование профиля">
-      <img src="./images/button_close.svg" alt="Закрыть" class="popup__close button">
+      <button type="button" aria-label="Закрыть" class="button button_type_close popup__close"></button>
       <form action="some_URL" method="get" class="popup__container" name="profile-edit-form">
         <h2 class="popup__title">Редактировать профиль</h2>
-        <input type="text" placeholder="..." class="popup__input popup__input_type_profile-name" required>
-        <input type="text" placeholder="..." class="popup__input popup__input_type_profile-occupation" required>
+        <fieldset class="form__input-container">
+          <input type="text" placeholder="Жак-Ив Кусто" class="popup__input popup__input_type_profile-name" required>
+          <input type="text" placeholder="Исследователь океана" class="popup__input popup__input_type_profile-occupation" required>
+        </fieldset>
         <button type="submit" class="button button_type_save">Сохранить</button>
       </form>
     </section>

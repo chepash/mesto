@@ -16,7 +16,6 @@
   .profile {
     grid-template-columns: 100%;
     justify-items: center;
-    row-gap: 32px;
   }
 }
 

@@ -1,4 +1,4 @@
-/* плавное появление отступов по бокам */
+/* адаптивные отступы по бокам */
 @media screen and (max-width: 1000px) {
   .section_size_narrow {
     max-width: 88vw;

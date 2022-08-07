@@ -91,12 +91,12 @@
 
     <section class="popup section" aria-label="Всплывающее окно: Редактирование профиля">
       <img src="./images/button_close.svg" alt="Закрыть" class="popup__close button">
-      <div class="popup__container">
+      <form action="" method="get" class="popup__container" name="profile-edit-form">
         <h2 class="popup__title">Редактировать профиль</h2>
-        <input type="text" placeholder="..." class="popup__input popup__input_type_profile-name">
-        <input type="text" placeholder="..." class="popup__input popup__input_type_profile-occupation">
+        <input type="text" placeholder="..." class="popup__input popup__input_type_profile-name" required>
+        <input type="text" placeholder="..." class="popup__input popup__input_type_profile-occupation" required>
         <button type="submit" class="button button_type_save">Сохранить</button>
-      </div>
+      </form>
     </section>
 
     <script src="./scripts/index.js"></script>

@@ -23,7 +23,7 @@
 
 @media screen and (max-width: 768px) {
   .popup__container {
-    /* теперь весь попап всего одна колонка, а не 3 */
+    /* теперь весь попап всего одна колонка, а не 3. Кнопка закрытия будет сверху*/
     grid-column-start: 1;
 
     place-self: center;

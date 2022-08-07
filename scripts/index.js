@@ -10,7 +10,7 @@ const profileOccupation = document.querySelector('.profile__occupation');
 const PopupInputName = document.querySelector('.popup__input_type_profile-name');
 const PopupInputOccupation = document.querySelector('.popup__input_type_profile-occupation');
 
-
+// открытие и закрытие формы без сохранения
 const openPopup = function () {
   popup.classList.add('popup_opened');
   PopupInputName.value = profileName.textContent;
@@ -21,13 +21,16 @@ const closePopup = function () {
   popup.classList.remove('popup_opened');
 }
 
-const saveEdit = function () {
+editButton.addEventListener('click', openPopup);
+closeButton.addEventListener('click', closePopup);
+
+
+// закрытие формы с сохранением
+const saveEdit = function (event) {
+  event.preventDefault();
   popup.classList.remove('popup_opened');
   profileName.textContent = PopupInputName.value;
   profileOccupation.textContent = PopupInputOccupation.value;
 }
 
-editButton.addEventListener('click', openPopup);
-closeButton.addEventListener('click', closePopup);
-saveButton.addEventListener('click', saveEdit);
-
+popup.addEventListener('submit', saveEdit);

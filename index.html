@@ -90,14 +90,16 @@
 
     <section class="popup section" aria-label="Всплывающее окно: Редактирование профиля">
       <button type="button" aria-label="Закрыть" class="button button_type_close popup__close"></button>
-      <form action="some_URL" method="get" class="popup__container" name="profile-edit-form">
-        <h2 class="popup__title">Редактировать профиль</h2>
-        <fieldset class="popup__input-container">
-          <input type="text" placeholder="Жак-Ив Кусто" class="popup__input popup__input_type_profile-name" required>
-          <input type="text" placeholder="Исследователь океана" class="popup__input popup__input_type_profile-occupation" required>
-        </fieldset>
-        <button type="submit" class="button button_type_save">Сохранить</button>
-      </form>
+      <div class="popup__container">
+        <form action="some_URL" method="get" class="popup__form" name="profile-edit-form">
+          <h2 class="popup__title">Редактировать профиль</h2>
+          <fieldset class="popup__input-container">
+            <input type="text" placeholder="Имя пользователя" class="popup__input popup__input_type_profile-name" required>
+            <input type="text" placeholder="Деятельность" class="popup__input popup__input_type_profile-occupation" required>
+          </fieldset>
+          <button type="submit" class="button button_type_save">Сохранить</button>
+        </form>
+      </div>
     </section>
 
     <script src="./scripts/index.js"></script>

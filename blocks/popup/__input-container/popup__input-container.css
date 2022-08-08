@@ -2,14 +2,21 @@
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  margin: 0 0 45px 0;
+  margin: 50px 0 47px;
   padding: 0;
 
   border: none;
-  /* height: 100%; */
   max-height: min-content;
 
   display: grid;
   grid-template-rows: repeat(autofit, min-content);
   row-gap: 30px;
+}
+
+@media screen and (max-width: 768px) {
+  .popup__input-container {
+    margin: 75px 0 45px;
+    font-size: 21px;
+    line-height: 1.22;
+  }
 }

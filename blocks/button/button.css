@@ -4,12 +4,8 @@
   cursor: pointer;
 
   /* обнуляем стили кнопок */
+  box-sizing: border-box;
   background: none;
   box-shadow: none;
   border: none;
-}
-
-.button:hover {
-  transition: opacity 0.2s ease;
-  opacity: 0.6;
 }

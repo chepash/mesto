@@ -16,11 +16,15 @@
   align-self: center;
 }
 
+.button_type_add:hover {
+  transition: opacity 0.2s ease;
+  opacity: 0.6;
+}
+
 @media screen and (max-width: 768px) {
   .button_type_add {
     grid-column-start: 1;
     grid-column-end: -1;
-    width: 100px;
     place-self: center;
   }
 }
@@ -28,6 +32,7 @@
 
 @media screen and (max-width: 540px) {
   .button_type_add {
+    width: 100%;
     background-size: 16px;
   }
 }

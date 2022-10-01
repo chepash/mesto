@@ -48,6 +48,12 @@ const render = () => {
   })
 }
 
+//функция удаления карточки
+const handleDeleteCard = (e) => {
+  const currentCard = e.target.closest('.element');
+  currentCard.remove();
+}
+
 //функция формирования DOM элемента из template
 const createElementNode = (name, link) => {
   const currentElement = template.content.cloneNode(true);
@@ -58,8 +64,12 @@ const createElementNode = (name, link) => {
   currentPicture.src = link;
   currentPicture.alt = name;
 
+  const deleteBtn = currentElement.querySelector(".button_type_delete");
+  deleteBtn.addEventListener('click', handleDeleteCard);
+
   return currentElement;
 }
 
-render();
 
+
+render();

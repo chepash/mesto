@@ -10,6 +10,10 @@ const profileOccupation = document.querySelector('.profile__occupation');
 const PopupInputName = document.querySelector('.popup__input_type_profile-name');
 const PopupInputOccupation = document.querySelector('.popup__input_type_profile-occupation');
 
+//переменные для отображаем список начальных карточек
+const elementsContainer = document.querySelector(".elements__list");
+const template = document.querySelector(".template");
+
 // открытие и закрытие формы без сохранения
 const openPopup = function () {
   popup.classList.add('popup_opened');
@@ -34,3 +38,28 @@ const saveEdit = function (event) {
 }
 
 popup.addEventListener('submit', saveEdit);
+
+
+//функция отрисовыввания начальных карточек
+const render = () => {
+  initialCards.forEach((card) => {
+    const currentCard = createElementNode(card.name, card.link);
+    elementsContainer.append(currentCard);
+  })
+}
+
+//функция формирования DOM элемента из template
+const createElementNode = (name, link) => {
+  const currentElement = template.content.cloneNode(true);
+  const currentName = currentElement.querySelector(".element__caption");
+  const currentPicture = currentElement.querySelector(".element__image");
+
+  currentName.textContent = name;
+  currentPicture.src = link;
+  currentPicture.alt = name;
+
+  return currentElement;
+}
+
+render();
+

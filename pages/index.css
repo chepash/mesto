@@ -56,3 +56,7 @@
 @import url(../blocks/page/__list/page__list.css); /*переопредеяем стили всех возможных списков*/
 @import url(../blocks/content/__section/content__section.css); /*оцентровка и ширина 100% секций внутри блока content */
 @import url(../blocks/popup/__close/popup__close.css); /* позиционирование кнопки close */
+
+/* * {
+  outline: 1px solid #f00 !important;
+} */

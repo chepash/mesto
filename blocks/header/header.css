@@ -9,19 +9,3 @@
   flex-direction: column;
   align-items: flex-start;
 }
-
-
-/* плавное появление отступа слева у логотипа
-При этом не затрагиваем белый border всего header*/
-/* 27px + 880px + 27px = 934px*/
-@media screen and (max-width: 934px) {
-  .header {
-    padding-left: calc((934px - 100vw)/2); /* от 0 до 27 */
-  }
-}
-
-@media screen and (max-width: 880px) {
-  .header {
-    padding-left: 27px;
-  }
-}

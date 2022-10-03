@@ -39,7 +39,6 @@ const handleOpenPopup = (e) => {
     currentPopup = document.querySelector('.popup_type_profile-edit');
     PopupInputName.value = profileName.textContent;
     PopupInputOccupation.value = profileOccupation.textContent;
-
     currentPopup.addEventListener('submit', handleSaveEdit);
   }
 
@@ -48,7 +47,6 @@ const handleOpenPopup = (e) => {
     currentPopup = document.querySelector('.popup_type_add-card');
     PopupInputPlace.value = '';
     PopupInputImgLink.value = '';
-
     currentPopup.addEventListener('submit', handleAddCard);
   }
 
@@ -62,7 +60,7 @@ const handleOpenPopup = (e) => {
     currentPopupImgEl.alt = e.target.alt;
 
     const currentCard = e.target.closest('.element'); //ищем ближайшего родителя, дом элемент всей карточки, по которой кликнули
-    const currentCardCaption = currentCard.querySelector('.element__caption'); //теперь в полученной карточке ищем подпись к картинке, хотя можно было взять из e.target.alt;
+    const currentCardCaption = currentCard.querySelector('.element__caption'); //теперь в полученной карточке ищем подпись к картинке
     const currentPopupCaption = currentPopup.querySelector('.popup__image-caption');
     currentPopupCaption.textContent = currentCardCaption.textContent;
   }
@@ -122,10 +120,18 @@ const handleDeleteCard = (e) => {
 }
 
 //функция закрытия формы добавления карточки с сохранением
-const handleAddCard = function (e) {
+const handleAddCard = (e) => {
   e.preventDefault();
-  currentPopup.classList.remove('popup_opened');
   initialCards.unshift({name: PopupInputPlace.value, link: PopupInputImgLink.value});
+
+  currentPopup.classList.add('popup_closed'); //плавно закрываемся с помощью добавлени класса стиля
+  // 0.3 секунды ждём пока закончится плавная анимация скрытия формы и чистим больше ненужные классы
+  setTimeout(function(){
+    currentPopup.classList.remove('popup_opened');
+    currentPopup.classList.remove('popup_closed');
+    currentPopup = null;
+  }, 300);
+
   render();
 }
 

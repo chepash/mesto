@@ -5,7 +5,7 @@
   width: 100%;
   height: 100%;
 
-  background-color: #00000050;
+  background-color: #00000080; /* 80hex это 50% alpha */
 
   display: none;
   /* грид с 3 колонками чтобы оцентровать и положить крестик в угол

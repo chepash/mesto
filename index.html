@@ -42,6 +42,8 @@
       </footer>
     </div>
 
+
+    <!-- popup редактирования профиля -->
     <section class="popup section popup_type_profile-edit" aria-label="Всплывающее окно: Редактирование профиля">
       <button type="button" aria-label="Закрыть" class="button button_type_close popup__close"></button>
       <div class="popup__container">
@@ -56,6 +58,7 @@
       </div>
     </section>
 
+    <!-- popup добавления карточки -->
     <section class="popup section popup_type_add-card" aria-label="Всплывающее окно: Добавление карточки">
       <button type="button" aria-label="Закрыть" class="button button_type_close popup__close"></button>
       <div class="popup__container">
@@ -69,6 +72,16 @@
         </form>
       </div>
     </section>
+
+    <!-- popup просмотра изображения -->
+    <section class="popup section popup_type_card-view" aria-label="Всплывающее окно: Просмотр карточки">
+      <button type="button" aria-label="Закрыть" class="button button_type_close popup__close"></button>
+      <figure class="popup__image-container">
+        <img class="popup__image" src="Путь к картинке" alt="Название места">
+        <figcaption class="popup__image-caption">Название места</figcaption>
+      </figure>
+    </section>
+
 
     <template class="template">
       <li class="element">

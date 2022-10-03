@@ -1,5 +1,5 @@
-/* в задании сказано указать block или flex.
-Но я использовал грид для позиционирования кнопки "Закрытие" */
 .popup_opened {
-  display: grid;
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.3s linear;
 }

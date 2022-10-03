@@ -7,7 +7,11 @@
 
   background-color: #00000080; /* 80hex это 50% alpha */
 
-  display: none;
+  /* в задании сказано указать block или flex.
+  Но я использовал грид для позиционирования кнопки "Закрытие" */
+  display: grid;
+  visibility: hidden;
+  opacity: 0;
   /* грид с 3 колонками чтобы оцентровать и положить крестик в угол
   без лишних обёрток и отрицательных отсупов */
   grid-template-columns: 32px min-content min-content;

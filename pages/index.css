@@ -30,7 +30,6 @@
 /* popups */
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
-@import url(../blocks/popup/_closed/popup_closed.css);
 @import url(../blocks/popup/__container/popup__container.css);
   @import url(../blocks/popup/__form/popup__form.css);
   @import url(../blocks/popup/__title/popup__title.css);
@@ -39,7 +38,7 @@
 @import url(../blocks/popup/__image-container/popup__image-container.css);
   @import url(../blocks/popup/__image/popup__image.css);
   @import url(../blocks/popup/__image-caption/popup__image-caption.css);
-@import url(../blocks/popup/_type/popup_type_card-view.css);
+@import url(../blocks/popup/_type/popup_type_image.css);
 
 /* кнопки */
 @import url(../blocks/button/button.css);

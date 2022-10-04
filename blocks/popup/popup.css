@@ -10,8 +10,11 @@
   /* в задании сказано указать block или flex.
   Но я использовал грид для позиционирования кнопки "Закрытие" */
   display: grid;
+
   visibility: hidden;
   opacity: 0;
+  transition: opacity 250ms ease-in, visibility 0ms ease-in 250ms;
+
   /* грид с 3 колонками чтобы оцентровать и положить крестик в угол
   без лишних обёрток и отрицательных отсупов */
   grid-template-columns: 32px min-content min-content;

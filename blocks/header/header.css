@@ -3,7 +3,7 @@
   padding: 0;
   width: 100%;
   border-bottom: 1px solid #54545470;
-  flex: 1; /* для липкого футера */
+  flex: 0; /* для липкого хэдера */
 
   display: flex;
   flex-direction: column;

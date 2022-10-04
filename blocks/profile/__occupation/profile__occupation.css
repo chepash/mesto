@@ -7,30 +7,29 @@
   font-size: 18px;
   line-height: 1.22;
 
-  grid-column-start: 2;
+
   grid-row-start: 2;
 
   /* Если название профессии оооочень длинное */
-  max-width: 40vw;
+  max-width: 100%;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
 }
 
+
 @media screen and (max-width: 768px) {
   .profile__occupation {
+
     font-size: 16px;
     line-height: 1.21;
-
-    max-width: 50vw;
   }
 }
 
 @media screen and (max-width: 540px) {
   .profile__occupation {
+    grid-column-start: 2;
     text-align: center;
-
-    max-width: 70vw;
   }
 }
 

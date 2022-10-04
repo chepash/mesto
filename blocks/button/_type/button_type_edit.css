@@ -9,9 +9,8 @@
   background-position: center;
   background-repeat: no-repeat;
 
-
+  grid-column-start: 2;
   align-self: center;
-  grid-column-start: 3;
 }
 
 .button_type_edit:hover {
@@ -22,8 +21,15 @@
 
 @media screen and (max-width: 768px) {
   .button_type_edit {
+    grid-column-start: 2;
     width: 21px;
     height: 21px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .button_type_edit {
+    grid-column-start: 3;
   }
 }
 

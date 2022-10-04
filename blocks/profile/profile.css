@@ -1,13 +1,22 @@
 .profile {
+  width: 100%;
   display: grid;
-  grid-template-columns: min-content min-content auto;
+  grid-template-columns: min-content auto auto;
+  column-gap: 30px;
 
 }
+
+@media screen and (max-width: 1000px) {
+  .profile {
+    grid-template-columns: min-content auto auto;
+  }
+}
+
 
 @media screen and (max-width: 768px) {
   .profile {
     justify-content: center;
-    grid-template-columns: min-content min-content;
+    grid-template-columns: auto auto;
     row-gap: 32px;
   }
 }

@@ -4,9 +4,12 @@
   width: 100%;
 
   display: grid;
+  grid-template-rows: min-content; /* чтобы прижать секцию profile к верху */
+  grid-template-columns: auto;
   row-gap: 50px;
 
-  flex: 1; /* для липкого футера */
+
+  flex: 1; /* для липкого футера и хэдэра независимо от колтчества контента на странице */
 }
 
 @media screen and (max-width: 768px) {

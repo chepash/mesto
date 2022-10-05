@@ -21,10 +21,10 @@ const cardPopupCloseBtn = cardPopup.querySelector('.button_type_close');
 const imagePopupCloseBtn = imagePopup.querySelector('.button_type_close');
 
 //все инпуты
-const profilePopupInputName = document.querySelector('.popup__input_type_profile-name');
-const profilePopupInputOccupation = document.querySelector('.popup__input_type_profile-occupation');
-const cardPopupInputPlace = document.querySelector('.popup__input_type_place-name');
-const cardPopupInputLink = document.querySelector('.popup__input_type_image-link');
+const profilePopupInputName = profilePopup.querySelector('.popup__input_type_profile-name');
+const profilePopupInputOccupation = profilePopup.querySelector('.popup__input_type_profile-occupation');
+const cardPopupInputPlace = cardPopup.querySelector('.popup__input_type_place-name');
+const cardPopupInputLink = cardPopup.querySelector('.popup__input_type_image-link');
 
 //переменные для отображения начальных карточек
 const elementsContainer = document.querySelector(".elements__list");

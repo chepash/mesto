@@ -95,11 +95,11 @@ const createElementNode = (cardData) => {
   currentPicture.src = cardData.link;
   currentPicture.addEventListener('click', () => handleCardClick({name: cardData.name, link: cardData.link}));//вместо передаваемого event создаём слушатель сразу с данными текущей карточки
 
-  const deleteBtn = currentElement.querySelector('.button_type_delete');
-  deleteBtn.addEventListener('click', handleDeleteCard);
+  const imageDeleteBtn = currentElement.querySelector('.button_type_delete');
+  imageDeleteBtn.addEventListener('click', handleDeleteCard);
 
-  const likeBtn = currentElement.querySelector('.button_type_like');
-  likeBtn.addEventListener('click', handleLikeCard);
+  const imageLikeBtn = currentElement.querySelector('.button_type_like');
+  imageLikeBtn.addEventListener('click', handleLikeCard);
 
   return currentElement;
 }

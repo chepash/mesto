@@ -13,7 +13,7 @@
 
   visibility: hidden;
   opacity: 0;
-  transition: opacity 250ms ease-in, visibility 0ms ease-in 250ms;
+  transition: opacity 0.25s ease-in, visibility 0s ease-in 0.25s;
 
   /* грид с 3 колонками чтобы оцентровать и положить крестик в угол
   без лишних обёрток и отрицательных отсупов */

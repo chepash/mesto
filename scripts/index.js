@@ -11,14 +11,16 @@ const cardAddBtn = document.querySelector('.button_type_add');
 const profileName = document.querySelector('.profile__name');
 const profileOccupation = document.querySelector('.profile__occupation');
 
+//элементы попапа просмотра увеличенных изображений
+const imagePopupImageEl = imagePopup.querySelector('.popup__image');
+const imagePopupCaption = imagePopup.querySelector('.popup__image-caption');
+
 //формы
 const profilePopupForm = profilePopup.querySelector('.popup__form');
 const cardPopupForm = cardPopup.querySelector('.popup__form');
 
-//кнопки закрытия
-const profilePopupCloseBtn = profilePopup.querySelector('.button_type_close');
-const cardPopupCloseBtn = cardPopup.querySelector('.button_type_close');
-const imagePopupCloseBtn = imagePopup.querySelector('.button_type_close');
+//кнопки закрытия(все разом в виде коллекции)
+const popupCloseBtnList = document.querySelectorAll('.button_type_close');
 
 //все инпуты
 const profilePopupInputName = profilePopup.querySelector('.popup__input_type_profile-name');
@@ -36,8 +38,8 @@ const openPopup = (currentPopup) => {
 }
 
 //функция закрытия формы без сохранения
-const closePopup = (e) => {
-  e.target.closest('.popup').classList.remove('popup_opened');
+const closePopup = (currentPopup) => {
+  currentPopup.classList.remove('popup_opened');
 }
 
 //функция-обработчик добавления like на карточке
@@ -51,9 +53,8 @@ const handleSaveEdit = function (e) {
   e.preventDefault();
   profileName.textContent = profilePopupInputName.value;
   profileOccupation.textContent = profilePopupInputOccupation.value;
-  closePopup(e);
+  closePopup(profilePopup);
 }
-
 
 
 //функция-обработчик клика по кнопке edit (редактирования профиля)
@@ -65,20 +66,15 @@ const handleProfileEditBtnClick = () => {
 
 //функция-обработчик клика по кнопке add (добавления карточки)
 const handleCardAddBtnClick = () => {
-  cardPopupInputPlace.value = '';
-  cardPopupInputLink.value = '';
+  cardPopupForm.reset(); //метод у форм. для отчистки запомненных данных
   openPopup(cardPopup);
 }
 
 //функция-обработчик клика по картинке
 const handleCardClick = (currentPictureData) => {
-  const imagePopupImageEl = imagePopup.querySelector('.popup__image');
   imagePopupImageEl.alt = currentPictureData.name;
   imagePopupImageEl.src = currentPictureData.link;
-
-  const imagePopupCaption = imagePopup.querySelector('.popup__image-caption');
   imagePopupCaption.textContent = currentPictureData.name;
-
   openPopup(imagePopup);
 }
 
@@ -93,7 +89,7 @@ const createElementNode = (cardData) => {
   const currentPicture = currentElement.querySelector('.element__image');
   currentPicture.alt = cardData.name;
   currentPicture.src = cardData.link;
-  currentPicture.addEventListener('click', () => handleCardClick({name: cardData.name, link: cardData.link}));//вместо передаваемого event создаём слушатель сразу с данными текущей карточки
+  currentPicture.addEventListener('click', () => handleCardClick(cardData));//вместо передаваемого event создаём слушатель сразу с данными текущей карточки
 
   const imageDeleteBtn = currentElement.querySelector('.button_type_delete');
   imageDeleteBtn.addEventListener('click', handleDeleteCard);
@@ -123,7 +119,7 @@ const handleAddCard = (e) => {
   e.preventDefault();
   const newCard = createElementNode({name: cardPopupInputPlace.value, link: cardPopupInputLink.value});
   elementsContainer.prepend(newCard);
-  closePopup(e);
+  closePopup(cardPopup);
 }
 
 
@@ -134,9 +130,11 @@ cardAddBtn.addEventListener('click', handleCardAddBtnClick);
 profilePopupForm.addEventListener('submit', handleSaveEdit);
 cardPopupForm.addEventListener('submit', handleAddCard);
 
-profilePopupCloseBtn.addEventListener('click', closePopup);
-cardPopupCloseBtn.addEventListener('click', closePopup);
-imagePopupCloseBtn.addEventListener('click', closePopup);
+popupCloseBtnList.forEach(btn => {
+  const popup = btn.closest('.popup');
+  btn.addEventListener('click', () => closePopup(popup));
+})
+
 
 
 //вызываем функцию начальной отрисовки карточек

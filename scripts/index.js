@@ -16,17 +16,17 @@ const imagePopupImageEl = imagePopup.querySelector('.popup__image');
 const imagePopupCaption = imagePopup.querySelector('.popup__image-caption');
 
 //формы
-const profilePopupForm = profilePopup.querySelector('.popup__form');
-const cardPopupForm = cardPopup.querySelector('.popup__form');
+const profilePopupForm = profilePopup.querySelector('.form');
+const cardPopupForm = cardPopup.querySelector('.form');
 
 //кнопки закрытия(все разом в виде коллекции)
 const popupCloseBtnList = document.querySelectorAll('.button_type_close');
 
 //все инпуты
-const profilePopupInputName = profilePopup.querySelector('.popup__input_type_profile-name');
-const profilePopupInputOccupation = profilePopup.querySelector('.popup__input_type_profile-occupation');
-const cardPopupInputPlace = cardPopup.querySelector('.popup__input_type_place-name');
-const cardPopupInputLink = cardPopup.querySelector('.popup__input_type_image-link');
+const profilePopupInputName = profilePopup.querySelector('.form__input_type_profile-name');
+const profilePopupInputOccupation = profilePopup.querySelector('.form__input_type_profile-occupation');
+const cardPopupInputPlace = cardPopup.querySelector('.form__input_type_place-name');
+const cardPopupInputLink = cardPopup.querySelector('.form__input_type_image-link');
 
 //переменные для отображения начальных карточек
 const elementsContainer = document.querySelector(".elements__list");
@@ -71,10 +71,10 @@ const handleCardAddBtnClick = () => {
 }
 
 //функция-обработчик клика по картинке
-const handleCardClick = (currentPictureData) => {
-  imagePopupImageEl.alt = currentPictureData.name;
-  imagePopupImageEl.src = currentPictureData.link;
-  imagePopupCaption.textContent = currentPictureData.name;
+const handleCardClick = (cardData) => {
+  imagePopupImageEl.alt = cardData.name;
+  imagePopupImageEl.src = cardData.link;
+  imagePopupCaption.textContent = cardData.name;
   openPopup(imagePopup);
 }
 

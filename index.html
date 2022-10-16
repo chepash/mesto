@@ -46,29 +46,44 @@
     <section class="popup section popup_type_profile" aria-label="Всплывающее окно: Редактирование профиля">
       <button type="button" aria-label="Закрыть" class="button button_type_close popup__close"></button>
       <div class="popup__container">
-        <form action="some_URL" method="get" class="popup__form" name="profile-edit-form">
-          <h2 class="popup__title">Редактировать профиль</h2>
-          <fieldset class="popup__input-container">
-            <input type="text" placeholder="Имя пользователя" class="popup__input popup__input_type_profile-name" required>
-            <input type="text" placeholder="Деятельность" class="popup__input popup__input_type_profile-occupation" required>
+
+        <form action="some_URL" method="get" class="form" name="profile-edit-form">
+          <h2 class="form__title">Редактировать профиль</h2>
+          <fieldset class="form__input-container">
+
+            <input type="text" placeholder="Имя пользователя" class="form__input form__input_type_profile-name" required>
+            <!-- <span class="form__input-error form__input_type_profile-name-error">ошибка</span> -->
+
+            <input type="text" placeholder="Деятельность" class="form__input form__input_type_profile-occupation" required>
+            <!-- <span class="form__input-error form__input_type_profile-occupation-error">ошибка</span> -->
+
           </fieldset>
           <button type="submit" class="button button_type_save">Сохранить</button>
         </form>
+
       </div>
     </section>
+
 
     <!-- popup добавления карточки -->
     <section class="popup section popup_type_new-card" aria-label="Всплывающее окно: Добавление карточки">
       <button type="button" aria-label="Закрыть" class="button button_type_close popup__close"></button>
       <div class="popup__container">
-        <form action="some_URL" method="get" class="popup__form" name="card-add-form">
-          <h2 class="popup__title">Новое место</h2>
-          <fieldset class="popup__input-container">
-            <input type="text" placeholder="Название" class="popup__input popup__input_type_place-name" required>
-            <input type="text" placeholder="Ссылка на картинку" class="popup__input popup__input_type_image-link" required>
+
+        <form action="some_URL" method="get" class="form" name="card-add-form">
+          <h2 class="form__title">Новое место</h2>
+          <fieldset class="form__input-container">
+
+            <input type="text" placeholder="Название" class="form__input form__input_type_place-name" required>
+            <!-- <span class="form__input-error form__input_type_place-name-error">ошибка</span> -->
+
+            <input type="text" placeholder="Ссылка на картинку" class="form__input form__input_type_image-link" required>
+            <!-- <span class="form__input-error form__input_type_image-error">ошибка</span> -->
+
           </fieldset>
           <button type="submit" class="button button_type_save">Создать</button>
         </form>
+
       </div>
     </section>
 
@@ -95,5 +110,6 @@
 
     <script src="./scripts/cards.js"></script>
     <script src="./scripts/index.js"></script>
+    <script src="./scripts/validate.js"></script>
 </body>
 </html>

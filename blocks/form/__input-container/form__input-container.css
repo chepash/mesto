@@ -1,4 +1,4 @@
-.popup__input-container {
+.form__input-container {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -14,7 +14,7 @@
 }
 
 @media screen and (max-width: 768px) {
-  .popup__input-container {
+  .form__input-container {
     margin: 75px 0 45px;
     font-size: 21px;
     line-height: 1.22;

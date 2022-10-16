@@ -1,4 +1,4 @@
-.popup__input {
+.form__input {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -21,14 +21,14 @@
   color: #000000;
 }
 
-.popup__input::placeholder {
+.form__input::placeholder {
   font-weight: 400;
   font-size: 14px;
   line-height: 1.21;
   color: #C4C4C4;
 }
 
-.popup__input:focus {
+.form__input:focus {
   outline: 4px groove #4a84eb80;
   border-radius: 2px;
 }

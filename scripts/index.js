@@ -2,10 +2,16 @@
 const profilePopup = document.querySelector('.popup_type_profile');
 const cardPopup = document.querySelector('.popup_type_new-card');
 const imagePopup = document.querySelector('.popup_type_image');
+const popupList = document.querySelectorAll('.popup');
 
 //кнопки
 const profileEditBtn = document.querySelector('.button_type_edit');
 const cardAddBtn = document.querySelector('.button_type_add');
+const cardPopupSubmitBtn = cardPopup.querySelector('.button_type_submit');
+const profilePopupSubmitBtn = profilePopup.querySelector('.button_type_submit');
+
+//кнопки закрытия(все разом в виде коллекции)
+const popupCloseBtnList = document.querySelectorAll('.button_type_close');
 
 //данные профиля со страницы
 const profileName = document.querySelector('.profile__name');
@@ -19,27 +25,63 @@ const imagePopupCaption = imagePopup.querySelector('.popup__image-caption');
 const profilePopupForm = profilePopup.querySelector('.form');
 const cardPopupForm = cardPopup.querySelector('.form');
 
-//кнопки закрытия(все разом в виде коллекции)
-const popupCloseBtnList = document.querySelectorAll('.button_type_close');
-
 //все инпуты
 const profilePopupInputName = profilePopup.querySelector('.form__input_type_profile-name');
 const profilePopupInputOccupation = profilePopup.querySelector('.form__input_type_profile-occupation');
 const cardPopupInputPlace = cardPopup.querySelector('.form__input_type_place-name');
 const cardPopupInputLink = cardPopup.querySelector('.form__input_type_image-link');
+const formsInputList = document.querySelectorAll('.form__input');
+
+//все сообщения об ошибках
+const formInputErrorList = document.querySelectorAll('.form__input-error');
 
 //переменные для отображения начальных карточек
 const elementsContainer = document.querySelector(".elements__list");
 const template = document.querySelector(".template");
+
+
+//функция очистки всех сообщений об ошибках заполнения инпутов
+const clearErrorMessages = () => {
+  formInputErrorList.forEach(errorElement => {
+    errorElement.textContent = '';
+    errorElement.classList.remove('form__input-error_active');
+  });
+  formsInputList.forEach(formInputElement => {
+    formInputElement.classList.remove('form__input_type_error');
+  });
+}
+
+//функция проверки наличия формы у popup
+const isPopupHasForm = (popup) => {
+  return popup.contains(popup.querySelector('.form'));
+}
 
 //функция появления формы
 const openPopup = (currentPopup) => {
   currentPopup.classList.add('popup_opened');
 }
 
-//функция закрытия формы без сохранения
+//функция закрытия popup без сохранения
 const closePopup = (currentPopup) => {
   currentPopup.classList.remove('popup_opened');
+  if (isPopupHasForm(currentPopup)) {
+    clearErrorMessages();
+  }
+}
+
+//функция закрытия popup кликая на Overlay (без сохранения)
+const handlePopupOverlayClick = (e) => {
+  if (e.currentTarget == e.target) {
+    closePopup(e.target)
+  }
+}
+
+//функция закрытия popup кликая на Overlay (без сохранения)
+const handleEscapeKeyPress = (key) => {
+  const openedPopup = document.querySelector('.popup_opened');
+  if (key === "Escape" && openedPopup) {
+    closePopup(openedPopup);
+  }
 }
 
 //функция-обработчик добавления like на карточке
@@ -62,12 +104,14 @@ const handleProfileEditBtnClick = () => {
   profilePopupInputName.value = profileName.textContent;
   profilePopupInputOccupation.value = profileOccupation.textContent;
   openPopup(profilePopup);
+  setSubmitBtnState(profilePopupSubmitBtn, profilePopupForm.checkValidity());
 }
 
 //функция-обработчик клика по кнопке add (добавления карточки)
 const handleCardAddBtnClick = () => {
   cardPopupForm.reset(); //метод у форм. для отчистки запомненных данных
   openPopup(cardPopup);
+  setSubmitBtnState(cardPopupSubmitBtn, cardPopupForm.checkValidity());
 }
 
 //функция-обработчик клика по картинке
@@ -132,10 +176,18 @@ cardPopupForm.addEventListener('submit', handleAddCard);
 
 popupCloseBtnList.forEach(btn => {
   const popup = btn.closest('.popup');
-  btn.addEventListener('click', () => closePopup(popup));
+  btn.addEventListener('click', () => {
+    closePopup(popup);
+  });
 })
 
+popupList.forEach(popupElement => {
+  popupElement.addEventListener('click', handlePopupOverlayClick);
+})
 
+document.addEventListener('keydown', (e) => {
+  handleEscapeKeyPress(e.key)
+} );
 
 //вызываем функцию начальной отрисовки карточек
 render();

@@ -47,18 +47,34 @@
       <button type="button" aria-label="Закрыть" class="button button_type_close popup__close"></button>
       <div class="popup__container">
 
-        <form action="some_URL" method="get" class="form" name="profile-edit-form">
+        <form action="some_URL" method="get" class="form" name="profile-edit-form" novalidate>
           <h2 class="form__title">Редактировать профиль</h2>
-          <fieldset class="form__input-container">
+          <fieldset class="form__fieldset">
 
-            <input type="text" placeholder="Имя пользователя" class="form__input form__input_type_profile-name" required>
-            <!-- <span class="form__input-error form__input_type_profile-name-error">ошибка</span> -->
+            <label class="form__field">
+              <input  type="text"
+                      placeholder="Имя пользователя"
+                      class="form__input form__input_type_profile-name"
+                      id="form__input_type_profile-name"
+                      minlength="2"
+                      maxlength="40"
+                      required>
+              <span class="form__input-error form__input_type_profile-name-error"></span>
+            </label>
 
-            <input type="text" placeholder="Деятельность" class="form__input form__input_type_profile-occupation" required>
-            <!-- <span class="form__input-error form__input_type_profile-occupation-error">ошибка</span> -->
+            <label class="form__field">
+              <input  type="text"
+                      placeholder="Деятельность"
+                      class="form__input form__input_type_profile-occupation"
+                      id="form__input_type_profile-occupation"
+                      minlength="2"
+                      maxlength="200"
+                      required>
+              <span class="form__input-error form__input_type_profile-occupation-error"></span>
+            </label>
 
           </fieldset>
-          <button type="submit" class="button button_type_save">Сохранить</button>
+          <button type="submit" class="button button_type_submit">Сохранить</button>
         </form>
 
       </div>
@@ -70,18 +86,32 @@
       <button type="button" aria-label="Закрыть" class="button button_type_close popup__close"></button>
       <div class="popup__container">
 
-        <form action="some_URL" method="get" class="form" name="card-add-form">
+        <form action="some_URL" method="get" class="form" name="card-add-form" novalidate>
           <h2 class="form__title">Новое место</h2>
-          <fieldset class="form__input-container">
+          <fieldset class="form__fieldset">
 
-            <input type="text" placeholder="Название" class="form__input form__input_type_place-name" required>
-            <!-- <span class="form__input-error form__input_type_place-name-error">ошибка</span> -->
+            <label class="form__field">
+              <input  type="text"
+                      placeholder="Название"
+                      class="form__input form__input_type_place-name"
+                      id="form__input_type_place-name"
+                      minlength="2"
+                      maxlength="30"
+                      required>
+              <span class="form__input-error form__input_type_place-name-error"></span>
+            </label>
 
-            <input type="text" placeholder="Ссылка на картинку" class="form__input form__input_type_image-link" required>
-            <!-- <span class="form__input-error form__input_type_image-error">ошибка</span> -->
+            <label class="form__field">
+              <input  type="url"
+                      placeholder="Ссылка на картинку"
+                      class="form__input form__input_type_image-link"
+                      id="form__input_type_image-link"
+                      required>
+              <span class="form__input-error form__input_type_image-link-error"></span>
+            </label>
 
           </fieldset>
-          <button type="submit" class="button button_type_save">Создать</button>
+          <button type="submit" class="button button_type_submit">Создать</button>
         </form>
 
       </div>
@@ -108,8 +138,8 @@
       </li>
     </template>
 
+    <script src="./scripts/validate.js"></script>
     <script src="./scripts/cards.js"></script>
     <script src="./scripts/index.js"></script>
-    <script src="./scripts/validate.js"></script>
 </body>
 </html>

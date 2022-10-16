@@ -12,6 +12,8 @@
   width: 430px;
   height: min-content;
 
+  cursor: default;
+
   /* оцентровываем контейнер среди трёх колонок попапа */
   grid-column-start: 2;
   grid-row-start: 2;

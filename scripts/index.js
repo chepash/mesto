@@ -21,19 +21,15 @@ const profileOccupation = document.querySelector('.profile__occupation');
 const imagePopupImageEl = imagePopup.querySelector('.popup__image');
 const imagePopupCaption = imagePopup.querySelector('.popup__image-caption');
 
-//формы
+//все специфические формы
 const profilePopupForm = profilePopup.querySelector('.form');
 const cardPopupForm = cardPopup.querySelector('.form');
 
-//все инпуты
+//все специфические инпуты
 const profilePopupInputName = profilePopup.querySelector('.form__input_type_profile-name');
 const profilePopupInputOccupation = profilePopup.querySelector('.form__input_type_profile-occupation');
 const cardPopupInputPlace = cardPopup.querySelector('.form__input_type_place-name');
 const cardPopupInputLink = cardPopup.querySelector('.form__input_type_image-link');
-const formsInputList = document.querySelectorAll('.form__input');
-
-//все сообщения об ошибках
-const formInputErrorList = document.querySelectorAll('.form__input-error');
 
 //переменные для отображения начальных карточек
 const elementsContainer = document.querySelector(".elements__list");
@@ -41,13 +37,16 @@ const template = document.querySelector(".template");
 
 
 //функция очистки всех сообщений об ошибках заполнения инпутов
-const clearErrorMessages = () => {
-  formInputErrorList.forEach(errorElement => {
+const clearErrorMessages = (popup) => {
+  const formErrorList = popup.querySelectorAll(validationConfig.errorSelector);
+  const formsInputList = popup.querySelectorAll(validationConfig.inputSelector);
+
+  formErrorList.forEach(errorElement => {
     errorElement.textContent = '';
-    errorElement.classList.remove('form__input-error_active');
+    errorElement.classList.remove(validationConfig.errorClass);
   });
   formsInputList.forEach(formInputElement => {
-    formInputElement.classList.remove('form__input_type_error');
+    formInputElement.classList.remove(validationConfig.inputErrorClass);
   });
 }
 
@@ -57,15 +56,20 @@ const isPopupHasForm = (popup) => {
 }
 
 //функция появления формы
-const openPopup = (currentPopup) => {
-  currentPopup.classList.add('popup_opened');
+const openPopup = (popup) => {
+  popup.classList.add('popup_opened');
+
+  document.addEventListener('keydown', handleEscapeKeyPress);
 }
 
 //функция закрытия popup без сохранения
-const closePopup = (currentPopup) => {
-  currentPopup.classList.remove('popup_opened');
-  if (isPopupHasForm(currentPopup)) {
-    clearErrorMessages();
+const closePopup = (popup) => {
+  popup.classList.remove('popup_opened');
+
+  document.removeEventListener('keydown', handleEscapeKeyPress);
+
+  if (isPopupHasForm(popup)) {
+    clearErrorMessages(popup);
   }
 }
 
@@ -77,9 +81,9 @@ const handlePopupOverlayClick = (e) => {
 }
 
 //функция закрытия popup кликая на Overlay (без сохранения)
-const handleEscapeKeyPress = (key) => {
+const handleEscapeKeyPress = (e) => {
   const openedPopup = document.querySelector('.popup_opened');
-  if (key === "Escape" && openedPopup) {
+  if (e.key === "Escape" && openedPopup) {
     closePopup(openedPopup);
   }
 }
@@ -104,14 +108,14 @@ const handleProfileEditBtnClick = () => {
   profilePopupInputName.value = profileName.textContent;
   profilePopupInputOccupation.value = profileOccupation.textContent;
   openPopup(profilePopup);
-  setSubmitBtnState(profilePopupSubmitBtn, profilePopupForm.checkValidity());
+  setSubmitBtnState(validationConfig, profilePopupSubmitBtn, profilePopupForm.checkValidity());
 }
 
 //функция-обработчик клика по кнопке add (добавления карточки)
 const handleCardAddBtnClick = () => {
   cardPopupForm.reset(); //метод у форм. для отчистки запомненных данных
   openPopup(cardPopup);
-  setSubmitBtnState(cardPopupSubmitBtn, cardPopupForm.checkValidity());
+  setSubmitBtnState(validationConfig, cardPopupSubmitBtn, cardPopupForm.checkValidity());
 }
 
 //функция-обработчик клика по картинке
@@ -176,18 +180,12 @@ cardPopupForm.addEventListener('submit', handleAddCard);
 
 popupCloseBtnList.forEach(btn => {
   const popup = btn.closest('.popup');
-  btn.addEventListener('click', () => {
-    closePopup(popup);
-  });
+  btn.addEventListener('click', () => closePopup(popup));
 })
 
 popupList.forEach(popupElement => {
   popupElement.addEventListener('click', handlePopupOverlayClick);
 })
-
-document.addEventListener('keydown', (e) => {
-  handleEscapeKeyPress(e.key)
-} );
 
 //вызываем функцию начальной отрисовки карточек
 render();

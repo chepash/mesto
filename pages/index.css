@@ -44,8 +44,8 @@
 @import url(../blocks/form/__field/form__field.css);
 @import url(../blocks/form/__input/form__input.css);
   @import url(../blocks/form/__input/_type/form__input_type_error.css);
-@import url(../blocks/form/__input-error/form__input-error.css);
-  @import url(../blocks/form/__input-error/_active/form__input-error_active.css);
+@import url(../blocks/form/__error/form__error.css);
+  @import url(../blocks/form/__error/_visible/form__error_visible.css);
 
 
 /* кнопки */
@@ -69,7 +69,3 @@
 @import url(../blocks/page/__list/page__list.css); /*переопредеяем стили всех возможных списков*/
 @import url(../blocks/content/__section/content__section.css); /*оцентровка и ширина 100% секций внутри блока content */
 @import url(../blocks/popup/__close/popup__close.css); /* позиционирование кнопки close */
-
-/* * {
-  outline: 1px solid #f00 !important;
-} */

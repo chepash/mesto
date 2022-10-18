@@ -10,6 +10,23 @@ const validationConfig = {
   errorClass: 'form__error_visible'
 };
 
+
+//функция очистки всех сообщений формы об ошибках заполнения инпутов
+const clearErrorMessages = (popup) => {
+  const formErrorList = popup.querySelectorAll(validationConfig.errorSelector);
+  const formsInputList = popup.querySelectorAll(validationConfig.inputSelector);
+
+  formErrorList.forEach(errorElement => {
+    errorElement.textContent = '';
+    errorElement.classList.remove(validationConfig.errorClass);
+  });
+  formsInputList.forEach(formInputElement => {
+    formInputElement.classList.remove(validationConfig.inputErrorClass);
+  });
+}
+
+
+//функция установки состояния кнопки submit
 const setSubmitBtnState = (validationConfig, buttonElement, isEnabled) => {
   if (!isEnabled) {
     buttonElement.setAttribute('disabled', true);
@@ -20,6 +37,7 @@ const setSubmitBtnState = (validationConfig, buttonElement, isEnabled) => {
   }
 }
 
+//показываем красные ошибки у инпута
 const showInputError = (validationConfig, formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
   inputElement.classList.add(validationConfig.inputErrorClass);
@@ -27,6 +45,7 @@ const showInputError = (validationConfig, formElement, inputElement, errorMessag
   errorElement.textContent = errorMessage;
 };
 
+//убираем красные ошибки у инпута
 const hideInputError = (validationConfig, formElement, inputElement) => {
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
   inputElement.classList.remove(validationConfig.inputErrorClass);
@@ -34,7 +53,7 @@ const hideInputError = (validationConfig, formElement, inputElement) => {
   errorElement.textContent = '';
 };
 
-
+//проверяем валидность инпута
 const checkInputValidity = (validationConfig, formElement, inputElement) => {
   if (!inputElement.validity.valid) {
     showInputError(validationConfig, formElement, inputElement, inputElement.validationMessage);
@@ -42,6 +61,8 @@ const checkInputValidity = (validationConfig, formElement, inputElement) => {
     hideInputError(validationConfig, formElement, inputElement);
   }
 };
+
+
 
 //Вешаем слушатели события Input на все поля ввода для проверяем их валидности и установки валидности кнопки submit
 const setEventListeners = (validationConfig, formElement) => {
@@ -62,13 +83,10 @@ const setEventListeners = (validationConfig, formElement) => {
 
 
 
-//Функция валидации. Ищет все формы, и вешает слушатели на них и их элементы
+//Функция валидации. Ищет все формы, и вешает слушатели submit на них и слушатели input на элементы форм
 const enableValidation = (validationConfig) => {
   const formList = Array.from(document.querySelectorAll(validationConfig.formSelector));
   formList.forEach((formElement) => {
-    formElement.addEventListener('submit', function (evt) {
-      evt.preventDefault();
-    });
     setEventListeners(validationConfig, formElement);
   });
 }

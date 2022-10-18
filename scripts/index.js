@@ -36,41 +36,16 @@ const elementsContainer = document.querySelector(".elements__list");
 const template = document.querySelector(".template");
 
 
-//функция очистки всех сообщений об ошибках заполнения инпутов
-const clearErrorMessages = (popup) => {
-  const formErrorList = popup.querySelectorAll(validationConfig.errorSelector);
-  const formsInputList = popup.querySelectorAll(validationConfig.inputSelector);
-
-  formErrorList.forEach(errorElement => {
-    errorElement.textContent = '';
-    errorElement.classList.remove(validationConfig.errorClass);
-  });
-  formsInputList.forEach(formInputElement => {
-    formInputElement.classList.remove(validationConfig.inputErrorClass);
-  });
-}
-
-//функция проверки наличия формы у popup
-const isPopupHasForm = (popup) => {
-  return popup.contains(popup.querySelector('.form'));
-}
-
-//функция появления формы
+//функция появления popup
 const openPopup = (popup) => {
   popup.classList.add('popup_opened');
-
-  document.addEventListener('keydown', handleEscapeKeyPress);
+  document.addEventListener('keydown', handleEscapeKeyPress); //вешаем слушатель Esc
 }
 
-//функция закрытия popup без сохранения
+//функция закрытия popup (без сохранения)
 const closePopup = (popup) => {
   popup.classList.remove('popup_opened');
-
-  document.removeEventListener('keydown', handleEscapeKeyPress);
-
-  if (isPopupHasForm(popup)) {
-    clearErrorMessages(popup);
-  }
+  document.removeEventListener('keydown', handleEscapeKeyPress); //снимаем слушатель Esc
 }
 
 //функция закрытия popup кликая на Overlay (без сохранения)
@@ -80,11 +55,15 @@ const handlePopupOverlayClick = (e) => {
   }
 }
 
-//функция закрытия popup кликая на Overlay (без сохранения)
+//функция закрытия popup при клике на клавишу Escape (без сохранения)
 const handleEscapeKeyPress = (e) => {
-  const openedPopup = document.querySelector('.popup_opened');
-  if (e.key === "Escape" && openedPopup) {
-    closePopup(openedPopup);
+  if (e.key === "Escape") {
+    const openedPopup = document.querySelector('.popup_opened');
+    if (openedPopup) {
+      closePopup(openedPopup);
+    } else {
+      console.log('не могу найти открытый popup')
+    }
   }
 }
 
@@ -92,14 +71,6 @@ const handleEscapeKeyPress = (e) => {
 const handleLikeCard = (e) => {
   const currentLikeBtn = e.target;
   currentLikeBtn.classList.toggle('button_active');
-}
-
-//функция-обработчик закрытия формы редактирования профиля с сохранением
-const handleSaveEdit = function (e) {
-  e.preventDefault();
-  profileName.textContent = profilePopupInputName.value;
-  profileOccupation.textContent = profilePopupInputOccupation.value;
-  closePopup(profilePopup);
 }
 
 
@@ -113,7 +84,6 @@ const handleProfileEditBtnClick = () => {
 
 //функция-обработчик клика по кнопке add (добавления карточки)
 const handleCardAddBtnClick = () => {
-  cardPopupForm.reset(); //метод у форм. для отчистки запомненных данных
   openPopup(cardPopup);
   setSubmitBtnState(validationConfig, cardPopupSubmitBtn, cardPopupForm.checkValidity());
 }
@@ -162,12 +132,23 @@ const handleDeleteCard = (e) => {
   currentCard.remove();
 }
 
-//функция закрытия формы добавления карточки с сохранением
+//функция-обработчик закрытия формы редактирования профиля (с сохранением)
+const handleSaveEdit = function (e) {
+  e.preventDefault();
+  profileName.textContent = profilePopupInputName.value;
+  profileOccupation.textContent = profilePopupInputOccupation.value;
+  clearErrorMessages(profilePopup);
+  closePopup(profilePopup);
+}
+
+//функция закрытия формы добавления карточки (с сохранением)
 const handleAddCard = (e) => {
   e.preventDefault();
   const newCard = createElementNode({name: cardPopupInputPlace.value, link: cardPopupInputLink.value});
   elementsContainer.prepend(newCard);
+  clearErrorMessages(cardPopup);
   closePopup(cardPopup);
+  cardPopupForm.reset(); //метод у форм. для отчистки запомненных данных
 }
 
 

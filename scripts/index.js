@@ -79,6 +79,7 @@ const handleProfileEditBtnClick = () => {
   profilePopupInputName.value = profileName.textContent;
   profilePopupInputOccupation.value = profileOccupation.textContent;
   openPopup(profilePopup);
+  clearErrorMessages(profilePopup);
   setSubmitBtnState(validationConfig, profilePopupSubmitBtn, profilePopupForm.checkValidity());
 }
 

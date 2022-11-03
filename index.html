@@ -10,35 +10,22 @@
   <body class="page">
     <div class="page__container">
       <header class="header section">
-        <img
-          src="./images/header_logo.svg"
-          alt="Логотип"
-          class="header__logo" />
+        <img src="./images/header_logo.svg" alt="Логотип" class="header__logo" />
       </header>
 
       <main class="content section section_size_narrow page__content">
-        <section
-          class="profile section content__section"
-          aria-label="Профиль автора">
-          <img
-            src="./images/profile_pic.jpg"
-            alt="Картинка профиля"
-            class="profile__avatar" />
+        <section class="profile section content__section" aria-label="Профиль автора">
+          <img src="./images/profile_pic.jpg" alt="Картинка профиля" class="profile__avatar" />
 
           <div class="profile__info">
             <p class="profile__name">Павел</p>
             <p class="profile__occupation">Путешественник-любитель</p>
-            <button
-              type="button"
-              aria-label="Редактировать"
-              class="button button_type_edit"></button>
+            <button type="button" aria-label="Редактировать" class="button button_type_edit"></button>
           </div>
           <button type="button" class="button button_type_add"></button>
         </section>
 
-        <section
-          class="elements section content__section"
-          aria-label="Фотографии">
+        <section class="elements section content__section" aria-label="Фотографии">
           <ul class="elements__list page__list">
             <!-- сюда будут вставляться карточки с помощью javascript из template -->
           </ul>
@@ -51,20 +38,10 @@
     </div>
 
     <!-- popup редактирования профиля -->
-    <section
-      class="popup section popup_type_profile"
-      aria-label="Всплывающее окно: Редактирование профиля">
-      <button
-        type="button"
-        aria-label="Закрыть"
-        class="button button_type_close popup__close"></button>
+    <section class="popup section popup_type_profile" aria-label="Всплывающее окно: Редактирование профиля">
+      <button type="button" aria-label="Закрыть" class="button button_type_close popup__close"></button>
       <div class="popup__container">
-        <form
-          action="some_URL"
-          method="get"
-          class="form"
-          name="profile-edit-form"
-          novalidate>
+        <form action="some_URL" method="get" class="form" name="profile-edit-form" novalidate>
           <h2 class="form__title">Редактировать профиль</h2>
           <fieldset class="form__fieldset">
             <label class="form__field">
@@ -76,9 +53,7 @@
                 minlength="2"
                 maxlength="40"
                 required />
-              <span
-                class="form__error"
-                id="form__input_type_profile-name-error"></span>
+              <span class="form__error" id="form__input_type_profile-name-error"></span>
             </label>
 
             <label class="form__field">
@@ -90,33 +65,19 @@
                 minlength="2"
                 maxlength="200"
                 required />
-              <span
-                class="form__error"
-                id="form__input_type_profile-occupation-error"></span>
+              <span class="form__error" id="form__input_type_profile-occupation-error"></span>
             </label>
           </fieldset>
-          <button type="submit" class="button button_type_submit">
-            Сохранить
-          </button>
+          <button type="submit" class="button button_type_submit">Сохранить</button>
         </form>
       </div>
     </section>
 
     <!-- popup добавления карточки -->
-    <section
-      class="popup section popup_type_new-card"
-      aria-label="Всплывающее окно: Добавление карточки">
-      <button
-        type="button"
-        aria-label="Закрыть"
-        class="button button_type_close popup__close"></button>
+    <section class="popup section popup_type_new-card" aria-label="Всплывающее окно: Добавление карточки">
+      <button type="button" aria-label="Закрыть" class="button button_type_close popup__close"></button>
       <div class="popup__container">
-        <form
-          action="some_URL"
-          method="get"
-          class="form"
-          name="card-add-form"
-          novalidate>
+        <form action="some_URL" method="get" class="form" name="card-add-form" novalidate>
           <h2 class="form__title">Новое место</h2>
           <fieldset class="form__fieldset">
             <label class="form__field">
@@ -128,9 +89,7 @@
                 minlength="2"
                 maxlength="30"
                 required />
-              <span
-                class="form__error"
-                id="form__input_type_place-name-error"></span>
+              <span class="form__error" id="form__input_type_place-name-error"></span>
             </label>
 
             <label class="form__field">
@@ -140,26 +99,17 @@
                 class="form__input form__input_type_image-link"
                 id="form__input_type_image-link"
                 required />
-              <span
-                class="form__error"
-                id="form__input_type_image-link-error"></span>
+              <span class="form__error" id="form__input_type_image-link-error"></span>
             </label>
           </fieldset>
-          <button type="submit" class="button button_type_submit">
-            Создать
-          </button>
+          <button type="submit" class="button button_type_submit">Создать</button>
         </form>
       </div>
     </section>
 
     <!-- popup просмотра изображения -->
-    <section
-      class="popup section popup_type_image"
-      aria-label="Всплывающее окно: Просмотр карточки">
-      <button
-        type="button"
-        aria-label="Закрыть"
-        class="button button_type_close popup__close"></button>
+    <section class="popup section popup_type_image" aria-label="Всплывающее окно: Просмотр карточки">
+      <button type="button" aria-label="Закрыть" class="button button_type_close popup__close"></button>
       <figure class="popup__image-container">
         <img class="popup__image" src="#" alt="Название места" />
         <figcaption class="popup__image-caption">Название места</figcaption>
@@ -168,26 +118,20 @@
 
     <template class="template">
       <li class="element">
-        <img
-          src="./images/place_2021kurshkaya.jpg"
-          alt="Альтернативный текст"
-          class="element__image" />
-        <button
-          type="button"
-          aria-label="Удалить"
-          class="button button_type_delete"></button>
+        <img src="./images/place_2021kurshkaya.jpg" alt="Альтернативный текст" class="element__image" />
+        <button type="button" aria-label="Удалить" class="button button_type_delete"></button>
         <div class="element__footer">
           <p class="element__caption">Подпись</p>
-          <button
-            type="button"
-            aria-label="Нравится"
-            class="button button_type_like"></button>
+          <button type="button" aria-label="Нравится" class="button button_type_like"></button>
         </div>
       </li>
     </template>
 
     <script src="./scripts/validate.js"></script>
     <script src="./scripts/cards.js"></script>
+
+    <script src="./scripts/Card.js"></script>
+    <script src="./scripts/FormValidator.js"></script>
     <script src="./scripts/index.js"></script>
   </body>
 </html>

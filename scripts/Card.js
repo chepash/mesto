@@ -1,22 +1,15 @@
 class Card {
-  constructor(cardData, templateSelector) {
+  constructor(cardData, templateSelector, handleCardClick) {
     this._cardName = cardData.name;
     this._cardPicSrc = cardData.link;
     this._template = document.querySelector(templateSelector);
-  }
 
-  //метод-обработчик клика по картинке
-  _handleCardClick = () => {
-    imagePopupImageEl.alt = this._cardName;
-    imagePopupImageEl.src = this._cardPicSrc;
-    imagePopupCaption.textContent = this._cardName;
-    openPopup(imagePopup);
-  };
+    this._handleCardClick = handleCardClick;
+  }
 
   //метод-обработчик добавления like на карточке
   _handleLikeCard = () => {
     this._imageLikeBtn.classList.toggle("button_active");
-    console.log(this._currentElement);
   };
 
   //метод удаления карточки
@@ -34,7 +27,7 @@ class Card {
     this._currentPicture = this._currentElement.querySelector(".element__image");
     this._currentPicture.alt = this._cardName;
     this._currentPicture.src = this._cardPicSrc;
-    this._currentPicture.addEventListener("click", this._handleCardClick);
+    this._currentPicture.addEventListener("click", () => this._handleCardClick(this._cardName, this._cardPicSrc));
 
     this._imageDeleteBtn = this._currentElement.querySelector(".button_type_delete");
     this._imageDeleteBtn.addEventListener("click", this._handleDeleteCard);

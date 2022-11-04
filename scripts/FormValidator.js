@@ -54,21 +54,24 @@ class FormValidator {
     }
   };
 
+  //обработчик события input и полях ввода
+  _handleInput = () => {
+    this._checkInputValidity(validationConfig, formElement, inputElement);
+
+    if (formElement.checkValidity()) {
+      this._setSubmitBtnState(validationConfig, this._submitBtn, true);
+    } else {
+      this._setSubmitBtnState(validationConfig, this._submitBtn, false);
+    }
+  };
+
   //Вешаем слушатели события Input на все поля ввода для проверяем их валидности и установки валидности кнопки submit
   _setEventListeners = (validationConfig, formElement) => {
     this._submitBtn = formElement.querySelector(validationConfig.submitButtonSelector);
     this._inputList = Array.from(formElement.querySelectorAll(validationConfig.inputSelector));
 
     this._inputList.forEach((inputElement) => {
-      inputElement.addEventListener("input", () => {
-        this._checkInputValidity(validationConfig, formElement, inputElement);
-
-        if (formElement.checkValidity()) {
-          this._setSubmitBtnState(validationConfig, this._submitBtn, true);
-        } else {
-          this._setSubmitBtnState(validationConfig, this._submitBtn, false);
-        }
-      });
+      inputElement.addEventListener("input", this._handleInput);
     });
   };
 

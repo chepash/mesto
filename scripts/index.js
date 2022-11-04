@@ -34,11 +34,9 @@ const newCardPopupInputLink = newCardPopup.querySelector(".form__input_type_imag
 //переменные для отображения начальных карточек
 const elementsContainer = document.querySelector(".elements__list");
 
-//валидация с помощью классов
+//создаем экземпляры класса валидации для попапов
 const profilePopupValidate = new FormValidator(validationConfig, profilePopup);
-profilePopupValidate.enableValidation();
 const newCardPopupValidate = new FormValidator(validationConfig, newCardPopup);
-newCardPopupValidate.enableValidation();
 
 //функция появления popup
 const openPopup = (popup) => {
@@ -75,15 +73,17 @@ const handleEscapeKeyPress = (e) => {
 const handleProfileEditBtnClick = () => {
   profilePopupInputName.value = profileName.textContent;
   profilePopupInputOccupation.value = profileOccupation.textContent;
+
+  profilePopupValidate.clearErrorMessages();
+  profilePopupValidate.setSubmitBtnState(profilePopupForm.checkValidity());
+
   openPopup(profilePopup);
-  clearErrorMessages(profilePopup);
-  setSubmitBtnState(validationConfig, profilePopupSubmitBtn, profilePopupForm.checkValidity());
 };
 
 //функция-обработчик клика по кнопке add (добавления карточки)
-const handleCardAddBtnClick = () => {
+const handleNewCardAddBtnClick = () => {
+  newCardPopupValidate.setSubmitBtnState(newCardPopupForm.checkValidity());
   openPopup(newCardPopup);
-  setSubmitBtnState(validationConfig, cardPopupSubmitBtn, newCardPopupForm.checkValidity());
 };
 
 //функция-обработчик клика по картинке
@@ -99,7 +99,7 @@ const handleSaveEdit = function (e) {
   e.preventDefault();
   profileName.textContent = profilePopupInputName.value;
   profileOccupation.textContent = profilePopupInputOccupation.value;
-  clearErrorMessages(profilePopup);
+  profilePopupValidate.clearErrorMessages();
   closePopup(profilePopup);
 };
 
@@ -115,14 +115,14 @@ const handleAddCard = (e) => {
     handleCardClick
   );
   elementsContainer.prepend(newCard.createElementNode());
-  clearErrorMessages(newCardPopup);
+  newCardPopupValidate.clearErrorMessages();
   closePopup(newCardPopup);
   newCardPopupForm.reset(); //метод у форм. для отчистки запомненных данных
 };
 
 //вешаем слушатели на интерактивные элементы
 profileEditBtn.addEventListener("click", handleProfileEditBtnClick);
-cardAddBtn.addEventListener("click", handleCardAddBtnClick);
+cardAddBtn.addEventListener("click", handleNewCardAddBtnClick);
 
 profilePopupForm.addEventListener("submit", handleSaveEdit);
 newCardPopupForm.addEventListener("submit", handleAddCard);
@@ -135,6 +135,10 @@ popupCloseBtnList.forEach((btn) => {
 popupList.forEach((popupElement) => {
   popupElement.addEventListener("click", handlePopupOverlayClick);
 });
+
+//инициализация валидации(вешание слушателей по сути)
+profilePopupValidate.enableValidation();
+newCardPopupValidate.enableValidation();
 
 //функция отрисовыввания начальных карточек(через класс)
 const render = () => {

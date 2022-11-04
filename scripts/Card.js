@@ -65,3 +65,5 @@ class Card {
     return this._currentElement;
   };
 }
+
+export { Card, initialCards };

@@ -90,11 +90,9 @@ class FormValidator {
 
   //Функция валидации. Ищем форму в попапе, и вешает слушатели submit на неё и слушатели input на элементы формы
   enableValidation = () => {
-    //так понимаю что теперь необязательно пробрасывать validationConfig
-    //из функции в функцию по цепочке,
-    //так как все функции могут обратиться к this._validationConfig напрямую
-    //в конструктре
     this._form = this._popup.querySelector(this._validationConfig.formSelector);
     this._setEventListeners();
   };
 }
+
+export { FormValidator, validationConfig };

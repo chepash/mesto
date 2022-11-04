@@ -1,3 +1,6 @@
+import { Card, initialCards } from "./Card.js";
+import { FormValidator, validationConfig } from "./FormValidator.js";
+
 //находим все попапы
 const profilePopup = document.querySelector(".popup_type_profile");
 const newCardPopup = document.querySelector(".popup_type_new-card");

@@ -1,30 +1,3 @@
-const initialCards = [
-  {
-    name: "Архыз",
-    link: "./images/place_2016arhys.jpg",
-  },
-  {
-    name: "Фиштинский перевал",
-    link: "./images/place_2018fisht.JPG",
-  },
-  {
-    name: "Оштен",
-    link: "./images/place_2018oshten.jpg",
-  },
-  {
-    name: "Карачаевский перевал",
-    link: "./images/place_2018karach.JPG",
-  },
-  {
-    name: "Озеро любви",
-    link: "./images/place_2021lovelake.jpg",
-  },
-  {
-    name: "Куршская коса",
-    link: "./images/place_2021kurshkaya.jpg",
-  },
-];
-
 class Card {
   constructor(cardData, templateSelector, handleCardClick) {
     this._cardName = cardData.name;
@@ -42,11 +15,14 @@ class Card {
   //метод удаления карточки
   _handleDeleteCard = () => {
     this._currentElement.remove();
+    //При удалении экземпляра класса его дополнительно после удаления нужно занулять.
+    //remove удаляет только разметку из html, сам объект карточки остается в памяти
+    this._currentElement = null;
   };
 
-  //метод формирования DOM элемента карточки из template
+  //метод формирования DOM-элемента карточки из template и навешивание слушателей
   createElementNode = () => {
-    this._currentElement = this._template.content.cloneNode(true).children[0];
+    this._currentElement = this._template.content.cloneNode(true).querySelector(".element");
 
     this._currentName = this._currentElement.querySelector(".element__caption");
     this._currentName.textContent = this._cardName;
@@ -66,4 +42,4 @@ class Card {
   };
 }
 
-export { Card, initialCards };
+export { Card };

@@ -1,5 +1,6 @@
-import { Card, initialCards } from "./Card.js";
-import { FormValidator, validationConfig } from "./FormValidator.js";
+import { initialCards, validationConfig } from "./data.js";
+import { Card } from "./Card.js";
+import { FormValidator } from "./FormValidator.js";
 
 //находим все попапы
 const profilePopup = document.querySelector(".popup_type_profile");
@@ -9,9 +10,7 @@ const popupList = document.querySelectorAll(".popup");
 
 //кнопки
 const profileEditBtn = document.querySelector(".button_type_edit");
-const cardAddBtn = document.querySelector(".button_type_add");
-const cardPopupSubmitBtn = newCardPopup.querySelector(".button_type_submit");
-const profilePopupSubmitBtn = profilePopup.querySelector(".button_type_submit");
+const newCardAddBtn = document.querySelector(".button_type_add");
 
 //кнопки закрытия(все разом в виде коллекции)
 const popupCloseBtnList = document.querySelectorAll(".button_type_close");
@@ -38,8 +37,8 @@ const newCardPopupInputLink = newCardPopup.querySelector(".form__input_type_imag
 const elementsContainer = document.querySelector(".elements__list");
 
 //создаем экземпляры класса валидации для попапов
-const profilePopupValidate = new FormValidator(validationConfig, profilePopup);
-const newCardPopupValidate = new FormValidator(validationConfig, newCardPopup);
+const profilePopupValidate = new FormValidator(validationConfig, profilePopupForm);
+const newCardPopupValidate = new FormValidator(validationConfig, newCardPopupForm);
 
 //функция появления popup
 const openPopup = (popup) => {
@@ -78,14 +77,14 @@ const handleProfileEditBtnClick = () => {
   profilePopupInputOccupation.value = profileOccupation.textContent;
 
   profilePopupValidate.clearErrorMessages();
-  profilePopupValidate.setSubmitBtnState(profilePopupForm.checkValidity());
+  profilePopupValidate.setSubmitBtnState();
 
   openPopup(profilePopup);
 };
 
 //функция-обработчик клика по кнопке add (добавления карточки)
 const handleNewCardAddBtnClick = () => {
-  newCardPopupValidate.setSubmitBtnState(newCardPopupForm.checkValidity());
+  newCardPopupValidate.setSubmitBtnState();
   openPopup(newCardPopup);
 };
 
@@ -98,26 +97,29 @@ const handleCardClick = (cardName, cardPicSrc) => {
 };
 
 //функция-обработчик закрытия формы редактирования профиля (с сохранением)
-const handleSaveEdit = function (e) {
+const handleSaveProfileEdit = function (e) {
   e.preventDefault();
   profileName.textContent = profilePopupInputName.value;
   profileOccupation.textContent = profilePopupInputOccupation.value;
-  profilePopupValidate.clearErrorMessages();
   closePopup(profilePopup);
 };
 
+//функция создания карточки(DOM-элемента) на основе класса
+const createCard = (cardData) => {
+  const сardInstance = new Card(cardData, ".template", handleCardClick);
+  return сardInstance.createElementNode();
+};
+
 //функция закрытия формы добавления карточки (с сохранением)
-const handleAddCard = (e) => {
+const handleAddNewCard = (e) => {
   e.preventDefault();
-  const newCard = new Card(
-    {
-      name: newCardPopupInputPlace.value,
-      link: newCardPopupInputLink.value,
-    },
-    ".template",
-    handleCardClick
-  );
-  elementsContainer.prepend(newCard.createElementNode());
+
+  const newCardElement = createCard({
+    name: newCardPopupInputPlace.value,
+    link: newCardPopupInputLink.value,
+  });
+  elementsContainer.prepend(newCardElement);
+
   newCardPopupValidate.clearErrorMessages();
   closePopup(newCardPopup);
   newCardPopupForm.reset(); //метод у форм. для отчистки запомненных данных
@@ -125,10 +127,10 @@ const handleAddCard = (e) => {
 
 //вешаем слушатели на интерактивные элементы
 profileEditBtn.addEventListener("click", handleProfileEditBtnClick);
-cardAddBtn.addEventListener("click", handleNewCardAddBtnClick);
+newCardAddBtn.addEventListener("click", handleNewCardAddBtnClick);
 
-profilePopupForm.addEventListener("submit", handleSaveEdit);
-newCardPopupForm.addEventListener("submit", handleAddCard);
+profilePopupForm.addEventListener("submit", handleSaveProfileEdit);
+newCardPopupForm.addEventListener("submit", handleAddNewCard);
 
 popupCloseBtnList.forEach((btn) => {
   const popup = btn.closest(".popup");
@@ -146,8 +148,8 @@ newCardPopupValidate.enableValidation();
 //функция отрисовыввания начальных карточек(через класс)
 const render = () => {
   initialCards.forEach((initialCardsItem) => {
-    const newCard = new Card(initialCardsItem, ".template", handleCardClick);
-    elementsContainer.append(newCard.createElementNode());
+    const сardElement = createCard(initialCardsItem);
+    elementsContainer.append(сardElement);
   });
 };
 

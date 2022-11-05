@@ -1,19 +1,9 @@
-const validationConfig = {
-  //селекторы с точкой в начале:
-  formSelector: ".form",
-  inputSelector: ".form__input",
-  errorSelector: ".form__error",
-  submitButtonSelector: ".button_type_submit",
-  //классы без точки в начале:
-  inactiveButtonClass: "button_disabled",
-  inputErrorClass: "form__input_type_error",
-  errorClass: "form__error_visible",
-};
-
 class FormValidator {
-  constructor(validationConfig, popup) {
+  constructor(validationConfig, form) {
     this._validationConfig = validationConfig;
-    this._popup = popup;
+    this._form = form;
+
+    this._submitBtn = this._form.querySelector(this._validationConfig.submitButtonSelector);
   }
 
   //показываем красные ошибки у инпута
@@ -54,7 +44,6 @@ class FormValidator {
 
   //Вешаем слушатели события Input на все поля ввода для проверяем их валидности и установки валидности кнопки submit
   _setEventListeners = () => {
-    this._submitBtn = this._form.querySelector(this._validationConfig.submitButtonSelector);
     this._inputList = Array.from(this._form.querySelectorAll(this._validationConfig.inputSelector));
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
@@ -65,21 +54,14 @@ class FormValidator {
 
   //функция очистки всех сообщений формы об ошибках заполнения инпутов
   clearErrorMessages = () => {
-    this._formErrorList = this._popup.querySelectorAll(this._validationConfig.errorSelector);
-    this._formsInputList = this._popup.querySelectorAll(this._validationConfig.inputSelector);
-
-    this._formErrorList.forEach((errorElement) => {
-      errorElement.textContent = "";
-      errorElement.classList.remove(this._validationConfig.errorClass);
-    });
-    this._formsInputList.forEach((formInputElement) => {
-      formInputElement.classList.remove(this._validationConfig.inputErrorClass);
+    this._inputList.forEach((inputElement) => {
+      this._hideInputError(inputElement);
     });
   };
 
   //функция установки состояния кнопки submit
-  setSubmitBtnState = (isEnabled) => {
-    if (!isEnabled) {
+  setSubmitBtnState = () => {
+    if (!this._form.checkValidity()) {
       this._submitBtn.setAttribute("disabled", true);
       this._submitBtn.classList.add(this._validationConfig.inactiveButtonClass);
     } else {
@@ -90,9 +72,8 @@ class FormValidator {
 
   //Функция валидации. Ищем форму в попапе, и вешает слушатели submit на неё и слушатели input на элементы формы
   enableValidation = () => {
-    this._form = this._popup.querySelector(this._validationConfig.formSelector);
     this._setEventListeners();
   };
 }
 
-export { FormValidator, validationConfig };
+export { FormValidator };

@@ -34,12 +34,7 @@ class FormValidator {
   //обработчик события input и полях ввода
   _handleInput = (inputElement) => {
     this._checkInputValidity(inputElement);
-
-    if (this._form.checkValidity()) {
-      this.setSubmitBtnState(true);
-    } else {
-      this.setSubmitBtnState(false);
-    }
+    this.setSubmitBtnState();
   };
 
   //Вешаем слушатели события Input на все поля ввода для проверяем их валидности и установки валидности кнопки submit

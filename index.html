@@ -43,8 +43,8 @@
       <div class="popup__container">
         <form action="some_URL" method="get" class="form" name="profile-edit-form" novalidate>
           <h2 class="form__title">Редактировать профиль</h2>
-          <fieldset class="form__fieldset">
-            <label class="form__field">
+          <div class="form__inputs-container">
+            <label class="form__input-wrap">
               <input
                 type="text"
                 placeholder="Имя пользователя"
@@ -56,7 +56,7 @@
               <span class="form__error" id="form__input_type_profile-name-error"></span>
             </label>
 
-            <label class="form__field">
+            <label class="form__input-wrap">
               <input
                 type="text"
                 placeholder="Деятельность"
@@ -79,8 +79,8 @@
       <div class="popup__container">
         <form action="some_URL" method="get" class="form" name="card-add-form" novalidate>
           <h2 class="form__title">Новое место</h2>
-          <fieldset class="form__fieldset">
-            <label class="form__field">
+          <div class="form__inputs-container">
+            <label class="form__input-wrap">
               <input
                 type="text"
                 placeholder="Название"
@@ -92,7 +92,7 @@
               <span class="form__error" id="form__input_type_place-name-error"></span>
             </label>
 
-            <label class="form__field">
+            <label class="form__input-wrap">
               <input
                 type="url"
                 placeholder="Ссылка на картинку"
@@ -101,7 +101,7 @@
                 required />
               <span class="form__error" id="form__input_type_image-link-error"></span>
             </label>
-          </fieldset>
+          </div>
           <button type="submit" class="button button_type_submit">Создать</button>
         </form>
       </div>

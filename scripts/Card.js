@@ -22,7 +22,7 @@ class Card {
 
   //метод формирования DOM-элемента карточки из template и навешивание слушателей
   createElementNode = () => {
-    this._currentElement = this._template.content.cloneNode(true).querySelector(".element");
+    this._currentElement = this._template.content.querySelector(".element").cloneNode(true);
 
     this._currentName = this._currentElement.querySelector(".element__caption");
     this._currentName.textContent = this._cardName;

@@ -1,3 +1,5 @@
+import "../pages/index.css";
+
 import { initialCards, validationConfig, userInfoConfig } from "./data.js";
 import { Card } from "./Card.js";
 import { FormValidator } from "./FormValidator.js";
@@ -19,7 +21,6 @@ const newCardPopup = new PopupWithForm(".popup_type_new-card", (inputsValues) =>
   });
   elementsContainer.addItem(newCardElement);
 
-  newCardPopupValidate.clearErrorMessages();
   newCardPopup.close();
 });
 newCardPopup.setEventListeners();
@@ -41,7 +42,7 @@ const newCardAddBtn = document.querySelector(".button_type_add");
 const profilePopupInputName = profilePopup.form.querySelector(".form__input_type_profile-name");
 const profilePopupInputOccupation = profilePopup.form.querySelector(".form__input_type_profile-occupation");
 
-//создаем экземпляры класса валидации для попапов
+//создаем инстансы класса валидации для попапов
 const profilePopupValidate = new FormValidator(validationConfig, profilePopup.form);
 const newCardPopupValidate = new FormValidator(validationConfig, newCardPopup.form);
 

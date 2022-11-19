@@ -1,27 +1,34 @@
+const place_2016arhys = new URL("../images/place_2016arhys.jpg", import.meta.url);
+const place_2018fisht = new URL("../images/place_2018fisht.JPG", import.meta.url);
+const place_2018oshten = new URL("../images/place_2018oshten.jpg", import.meta.url);
+const place_2018karach = new URL("../images/place_2018karach.JPG", import.meta.url);
+const place_2021lovelake = new URL("../images/place_2021lovelake.jpg", import.meta.url);
+const place_2021kurshkaya = new URL("../images/place_2021kurshkaya.jpg", import.meta.url);
+
 export const initialCards = [
   {
     name: "Архыз",
-    link: "./images/place_2016arhys.jpg",
+    link: place_2016arhys,
   },
   {
     name: "Фиштинский перевал",
-    link: "./images/place_2018fisht.JPG",
+    link: place_2018fisht,
   },
   {
     name: "Оштен",
-    link: "./images/place_2018oshten.jpg",
+    link: place_2018oshten,
   },
   {
     name: "Карачаевский перевал",
-    link: "./images/place_2018karach.JPG",
+    link: place_2018karach,
   },
   {
     name: "Озеро любви",
-    link: "./images/place_2021lovelake.jpg",
+    link: place_2021lovelake,
   },
   {
     name: "Куршская коса",
-    link: "./images/place_2021kurshkaya.jpg",
+    link: place_2021kurshkaya,
   },
 ];
 

@@ -1,11 +1,11 @@
 import { Popup } from "./Popup.js";
 
-class PopupWithImage extends Popup {
+export class PopupWithImage extends Popup {
   constructor(popupSelector) {
     super(popupSelector);
 
-    this.imgPopupImageElement = super._popupElement.querySelector(".popup__image");
-    this.imgPopupCaption = super._popupElement.querySelector(".popup__image-caption");
+    this.imgPopupImageElement = this._popup.querySelector(".popup__image");
+    this.imgPopupCaption = this._popup.querySelector(".popup__image-caption");
   }
 
   open(cardName, cardPicSrc) {
@@ -13,9 +13,7 @@ class PopupWithImage extends Popup {
     this.imgPopupImageElement.src = cardPicSrc;
     this.imgPopupCaption.textContent = cardName;
 
-    super._popupElement.classList.add("popup_opened");
+    this._popup.classList.add("popup_opened");
     document.addEventListener("keydown", super._handleEscClose); //вешаем слушатель Esc
   }
 }
-
-export { PopupWithImage };

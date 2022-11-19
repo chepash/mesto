@@ -1,4 +1,4 @@
-const initialCards = [
+export const initialCards = [
   {
     name: "Архыз",
     link: "./images/place_2016arhys.jpg",
@@ -25,7 +25,7 @@ const initialCards = [
   },
 ];
 
-const validationConfig = {
+export const validationConfig = {
   //селекторы с точкой в начале:
   //formSelector: ".form", не используется
   inputSelector: ".form__input",
@@ -37,4 +37,7 @@ const validationConfig = {
   errorClass: "form__error_visible",
 };
 
-export { initialCards, validationConfig };
+export const userInfoConfig = {
+  profileNameSelector: ".profile__name",
+  profileOccupationSelector: ".profile__occupation",
+};

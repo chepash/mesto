@@ -34,7 +34,7 @@ export class PopupWithForm extends Popup {
 
   close() {
     this._popup.classList.remove("popup_opened");
-    document.removeEventListener("keydown", this._handleEscClose); //снимаем слушатель Esc
+    document.removeEventListener("keydown", this._handleEscClose);
     this.form.reset();
   }
 }

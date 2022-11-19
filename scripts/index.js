@@ -63,6 +63,7 @@ const handleProfileEditBtnClick = () => {
 
 //функция-обработчик клика по кнопке add (открытие попапа добавления карточки)
 const handleNewCardAddBtnClick = () => {
+  profilePopupValidate.clearErrorMessages();
   newCardPopupValidate.setSubmitBtnState();
   newCardPopup.open();
 };

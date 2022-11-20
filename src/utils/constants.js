@@ -48,3 +48,7 @@ export const userInfoConfig = {
   profileNameSelector: ".profile__name",
   profileOccupationSelector: ".profile__occupation",
 };
+
+//находим кнопки на странице
+export const profileEditBtn = document.querySelector(".button_type_edit");
+export const newCardAddBtn = document.querySelector(".button_type_add");

@@ -4,14 +4,8 @@ export class Popup {
   }
 
   _handleEscClose = (e) => {
-    //содержит логику закрытия попапа клавишей Esc.
     if (e.key === "Escape") {
-      const openedPopup = document.querySelector(".popup_opened");
-      if (openedPopup) {
-        this.close();
-      } else {
-        console.log("не могу найти открытый popup");
-      }
+      this.close();
     }
   };
 

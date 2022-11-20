@@ -13,7 +13,6 @@ export class PopupWithImage extends Popup {
     this.imgPopupImageElement.src = cardPicSrc;
     this.imgPopupCaption.textContent = cardName;
 
-    this._popup.classList.add("popup_opened");
-    document.addEventListener("keydown", super._handleEscClose); //вешаем слушатель Esc
+    super.open();
   }
 }

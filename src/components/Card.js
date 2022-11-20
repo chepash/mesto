@@ -20,6 +20,16 @@ export class Card {
     this._currentElement = null;
   };
 
+  _setEventListeners() {
+    this._currentPicture.addEventListener("click", () => this._handleCardClick(this._cardName, this._cardPicSrc));
+
+    this._imageDeleteBtn = this._currentElement.querySelector(".button_type_delete");
+    this._imageDeleteBtn.addEventListener("click", this._handleDeleteCard);
+
+    this._imageLikeBtn = this._currentElement.querySelector(".button_type_like");
+    this._imageLikeBtn.addEventListener("click", this._handleLikeCard);
+  }
+
   //метод формирования DOM-элемента карточки из template и навешивание слушателей
   createElementNode = () => {
     this._currentElement = this._template.content.querySelector(".element").cloneNode(true);
@@ -30,13 +40,8 @@ export class Card {
     this._currentPicture = this._currentElement.querySelector(".element__image");
     this._currentPicture.alt = this._cardName;
     this._currentPicture.src = this._cardPicSrc;
-    this._currentPicture.addEventListener("click", () => this._handleCardClick(this._cardName, this._cardPicSrc));
 
-    this._imageDeleteBtn = this._currentElement.querySelector(".button_type_delete");
-    this._imageDeleteBtn.addEventListener("click", this._handleDeleteCard);
-
-    this._imageLikeBtn = this._currentElement.querySelector(".button_type_like");
-    this._imageLikeBtn.addEventListener("click", this._handleLikeCard);
+    this._setEventListeners();
 
     return this._currentElement;
   };

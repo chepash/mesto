@@ -6,6 +6,8 @@ export class UserInfo {
 
   getUserInfo() {
     const userData = {};
+    //"profileName" и "profileOccupation" прописаны в name инпутов попапа popup_type_profile
+    //чтобы связать с методом setInputValues класса PopupWithForm
     userData.profileName = this._profileName.textContent;
     userData.profileOccupation = this._profileOccupation.textContent;
     return userData;

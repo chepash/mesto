@@ -1,6 +1,6 @@
 const path = require("path"); // подключаем path к конфигу вебпак
 const HtmlWebpackPlugin = require("html-webpack-plugin"); // подключили плагин для работы с HTML
-const { CleanWebpackPlugin } = require("clean-webpack-plugin"); //подключили плагин удаляющий содержимое папки dist при сборке проекта
+const { CleanWebpackPlugin } = require("clean-webpack-plugin"); //подключили плагин удаляющий содержимое папки dist при сборке проекта в development
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 // module.exports — это синтаксис экспорта в Node.js
@@ -30,7 +30,7 @@ module.exports = {
       // rules — это массив правил
 
       //добавим в него объект правил для бабеля
-      //webpack прогоняет код через Babel
+      //webpack прогоняет код через babel-loader
       {
         test: /\.js$/,
         use: "babel-loader",

@@ -14,8 +14,7 @@ export const handleProfileEditBtnClick = () => {
   const userData = userInfo.getUserInfo();
 
   //у инпутов теперь есть атрибут name, который сочетается с
-  //названиями свойств объекта userData, получаемого из класса UserInfo
-  //кажется лишней связнвость через атрибуты в HTML
+  //названиями свойств объекта userData, получаемого из класса UserInfo методом getUserInfo
   profilePopup.setInputValues(userData);
 
   profilePopupValidate.clearErrorMessages();

@@ -1,6 +1,15 @@
 import "../pages/index.css";
 
-import { initialCards, validationConfig, userInfoConfig, profileEditBtn, newCardAddBtn } from "../utils/constants.js";
+import {
+  initialCards,
+  validationConfig,
+  userInfoConfig,
+  profileEditBtn,
+  newCardAddBtn,
+  apiOptions,
+} from "../utils/constants.js";
+
+import { Api } from "../components/Api.js";
 
 import { handleProfileEditBtnClick, handleNewCardAddBtnClick, createCard } from "../utils/utils.js";
 
@@ -10,7 +19,13 @@ import { PopupWithImage } from "../components/PopupWithImage.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import { UserInfo } from "../components/UserInfo.js";
 
+const api = new Api(apiOptions);
+
 export const userInfo = new UserInfo(userInfoConfig);
+
+api.getUserInfo().then((userDataFromServer) => {
+  userInfo.setUserInfo(userDataFromServer.name, userDataFromServer.about);
+});
 
 //создаём инстансы классов всех попапов и сразу вешаем слушатели на них
 export const popupWithImage = new PopupWithImage(".popup_type_image");
@@ -47,16 +62,18 @@ newCardPopupValidate.enableValidation();
 profileEditBtn.addEventListener("click", handleProfileEditBtnClick);
 newCardAddBtn.addEventListener("click", handleNewCardAddBtnClick);
 
-//создаем инстанс класса Section для отрисовывания карточек
-const elementsContainer = new Section(
-  {
-    items: initialCards,
-    renderer: (initialCardsItem) => {
-      const сardElement = createCard(initialCardsItem);
-      elementsContainer.addItem(сardElement);
+api.getInitialCards().then((initialCards) => {
+  //создаем асинхронно инстанс класса Section для отрисовывания карточек
+  const elementsContainer = new Section(
+    {
+      items: initialCards,
+      renderer: (initialCardsItem) => {
+        const сardElement = createCard(initialCardsItem);
+        elementsContainer.addItem(сardElement);
+      },
     },
-  },
-  ".elements__list"
-);
-
-elementsContainer.renderItems();
+    ".elements__list"
+  );
+  //и сразу отрисовываем
+  elementsContainer.renderItems();
+});

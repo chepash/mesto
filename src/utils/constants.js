@@ -5,7 +5,15 @@ const place_2018karach = new URL("../images/place_2018karach.JPG", import.meta.u
 const place_2021lovelake = new URL("../images/place_2021lovelake.jpg", import.meta.url);
 const place_2021kurshkaya = new URL("../images/place_2021kurshkaya.jpg", import.meta.url);
 
-export const initialCards = [
+export const apiOptions = {
+  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-55",
+  headers: {
+    authorization: "8abcd093-addb-4bd1-b00f-f600aa41c00a",
+    "Content-Type": "application/json",
+  },
+};
+
+export let initialCards = [
   {
     name: "Архыз",
     link: place_2016arhys,

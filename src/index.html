@@ -74,6 +74,17 @@
       </div>
     </section>
 
+    <!-- popup подтверждения удаления -->
+    <section class="popup section popup_type_confirmation" aria-label="Всплывающее окно: Редактирование профиля">
+      <button type="button" aria-label="Закрыть" class="button button_type_close popup__close"></button>
+      <div class="popup__container">
+        <form action="some_URL" method="get" class="form" name="delete-confirmation-form" novalidate>
+          <h2 class="form__title">Вы уверены?</h2>
+          <button type="submit" class="button button_type_submit">Сохранить</button>
+        </form>
+      </div>
+    </section>
+
     <!-- popup добавления карточки -->
     <section class="popup section popup_type_new-card" aria-label="Всплывающее окно: Добавление карточки">
       <button type="button" aria-label="Закрыть" class="button button_type_close popup__close"></button>
@@ -125,7 +136,10 @@
         <button type="button" aria-label="Удалить" class="button button_type_delete"></button>
         <div class="element__footer">
           <p class="element__caption">Подпись</p>
-          <button type="button" aria-label="Нравится" class="button button_type_like"></button>
+          <div class="element__like-wrap">
+            <button type="button" aria-label="Нравится" class="button button_type_like"></button>
+            <p class="element__like-count">0</p>
+          </div>
         </div>
       </li>
     </template>

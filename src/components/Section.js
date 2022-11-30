@@ -5,8 +5,8 @@ class Section {
     this._container = document.querySelector(containerSelector);
   }
 
-  renderItems(initialCardsFromServer) {
-    initialCardsFromServer.forEach((item) => this._renderer(item));
+  renderItems(initialCardsFromServer, myIdentificator) {
+    initialCardsFromServer.forEach((item) => this._renderer(item, myIdentificator));
   }
 
   addItem(element) {

@@ -36,7 +36,7 @@ export const handleCardClick = (cardName, cardPicSrc) => {
 };
 
 //функция создания карточки(DOM-элемента) на основе класса
-export const createCard = (cardData) => {
-  const сardInstance = new Card(cardData, ".template", handleCardClick);
+export const createCard = (cardData, myIdentificator) => {
+  const сardInstance = new Card(cardData, ".template", handleCardClick, myIdentificator);
   return сardInstance.createElementNode();
 };

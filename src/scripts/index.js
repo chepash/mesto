@@ -66,14 +66,13 @@ newCardAddBtn.addEventListener("click", handleNewCardAddBtnClick);
 
 //создаем инстанс класса Section для отрисовывания карточек
 const elementsContainer = new Section(
-  ".elements__list",
-
   {
-    renderer: (initialCardsItem) => {
-      const сardElement = createCard(initialCardsItem);
+    renderer: (initialCardsItem, myIdentificator) => {
+      const сardElement = createCard(initialCardsItem, myIdentificator);
       elementsContainer.addItem(сardElement);
     },
-  }
+  },
+  ".elements__list"
 );
 
 // api.getInitialCards().then((initialCardsFromServer) => {
@@ -84,9 +83,9 @@ const elementsContainer = new Section(
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([userDataFromServer, initialCardsFromServer]) => {
     userInfo.setUserInfo(userDataFromServer.name, userDataFromServer.about);
-    elementsContainer.renderItems(initialCardsFromServer);
+    elementsContainer.renderItems(initialCardsFromServer, userDataFromServer._id);
 
-    return;
+    return userDataFromServer;
   })
   .catch((err) => {
     console.log(`Ошибка: ${err}`);

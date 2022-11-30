@@ -1,8 +1,9 @@
 export class Card {
-  constructor(cardData, templateSelector, handleCardClick) {
-    this._cardName = cardData.name;
-    this._cardPicSrc = cardData.link;
+  constructor(cardData, templateSelector, handleCardClick, myIdentificator) {
+    this._cardData = cardData;
     this._template = document.querySelector(templateSelector);
+
+    this._myIdentificator = myIdentificator;
 
     this._handleCardClick = handleCardClick;
   }
@@ -21,7 +22,9 @@ export class Card {
   };
 
   _setEventListeners() {
-    this._currentPicture.addEventListener("click", () => this._handleCardClick(this._cardName, this._cardPicSrc));
+    this._currentPicture.addEventListener("click", () =>
+      this._handleCardClick(this._cardData.name, this._cardData.link)
+    );
 
     this._imageDeleteBtn = this._currentElement.querySelector(".button_type_delete");
     this._imageDeleteBtn.addEventListener("click", this._handleDeleteCard);
@@ -35,11 +38,26 @@ export class Card {
     this._currentElement = this._template.content.querySelector(".element").cloneNode(true);
 
     this._currentName = this._currentElement.querySelector(".element__caption");
-    this._currentName.textContent = this._cardName;
+    this._currentName.textContent = this._cardData.name;
 
     this._currentPicture = this._currentElement.querySelector(".element__image");
-    this._currentPicture.alt = this._cardName;
-    this._currentPicture.src = this._cardPicSrc;
+    this._currentPicture.alt = this._cardData.name;
+    this._currentPicture.src = this._cardData.link;
+
+    this._currentLikeCounter = this._currentElement.querySelector(".element__like-count");
+    this._currentLikeCounter.textContent = this._cardData.likes.length;
+
+    //console.log(this._cardData);
+
+    this._currentLikeButton = this._currentElement.querySelector(".button_type_like");
+    if (this._cardData.likes.includes(this._myIdentificator)) {
+      this._currentLikeButton.classList.add("button_active");
+    }
+
+    this._currentDeleteButton = this._currentElement.querySelector(".button_type_delete");
+    if (this._cardData.owner._id !== this._myIdentificator) {
+      this._currentDeleteButton.classList.add("button_hidden");
+    }
 
     this._setEventListeners();
 

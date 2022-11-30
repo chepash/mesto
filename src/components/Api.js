@@ -44,7 +44,7 @@ export class Api {
   }
 
   sendUserInfo(name, about) {
-    fetch(`${this.baseUrl}/users/me`, {
+    return fetch(`${this.baseUrl}/users/me`, {
       method: "PATCH",
       headers: {
         authorization: this.authToken,
@@ -61,10 +61,6 @@ export class Api {
         }
 
         return Promise.reject(res.status);
-      })
-      .then((result) => {
-        console.log(result);
-        return result;
       })
       .catch((err) => {
         console.log(`Ошибка: ${err}`);

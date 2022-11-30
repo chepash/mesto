@@ -11,11 +11,11 @@ import { Card } from "../components/Card.js";
 
 //функция-обработчик клика по кнопке edit (открытие попапа редактирования профиля)
 export const handleProfileEditBtnClick = () => {
-  const userData = userInfo.getUserInfo();
+  const userDataFromPage = userInfo.getUserInfo();
 
   //у инпутов теперь есть атрибут name, который сочетается с
   //названиями свойств объекта userData, получаемого из класса UserInfo методом getUserInfo
-  profilePopup.setInputValues(userData);
+  profilePopup.setInputValues(userDataFromPage);
 
   profilePopupValidate.clearErrorMessages();
   profilePopupValidate.setSubmitBtnState();

@@ -54,7 +54,7 @@ export const validationConfig = {
 
 export const userInfoConfig = {
   profileNameSelector: ".profile__name",
-  profileOccupationSelector: ".profile__occupation",
+  profileAboutSelector: ".profile__about",
 };
 
 //находим кнопки на странице

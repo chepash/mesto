@@ -23,10 +23,6 @@ const api = new Api(apiOptions);
 
 export const userInfo = new UserInfo(userInfoConfig);
 
-api.getUserInfo().then((userDataFromServer) => {
-  userInfo.setUserInfo(userDataFromServer.name, userDataFromServer.about);
-});
-
 //создаём инстансы классов всех попапов и сразу вешаем слушатели на них
 export const popupWithImage = new PopupWithImage(".popup_type_image");
 popupWithImage.setEventListeners();
@@ -43,10 +39,16 @@ export const newCardPopup = new PopupWithForm(".popup_type_new-card", (inputsVal
 newCardPopup.setEventListeners();
 
 export const profilePopup = new PopupWithForm(".popup_type_profile", (inputsValues) => {
-  userInfo.setUserInfo(
-    inputsValues["form__input_type_profile-name"],
-    inputsValues["form__input_type_profile-occupation"]
-  );
+  //отправляем данные на сервер и обновляем на странице
+  api
+    .sendUserInfo(inputsValues["form__input_type_profile-name"], inputsValues["form__input_type_profile-about"])
+    .then((res) => {
+      userInfo.setUserInfo(
+        inputsValues["form__input_type_profile-name"],
+        inputsValues["form__input_type_profile-about"]
+      );
+      return res;
+    });
 });
 profilePopup.setEventListeners();
 
@@ -62,18 +64,30 @@ newCardPopupValidate.enableValidation();
 profileEditBtn.addEventListener("click", handleProfileEditBtnClick);
 newCardAddBtn.addEventListener("click", handleNewCardAddBtnClick);
 
-api.getInitialCards().then((initialCards) => {
-  //создаем асинхронно инстанс класса Section для отрисовывания карточек
-  const elementsContainer = new Section(
-    {
-      items: initialCards,
-      renderer: (initialCardsItem) => {
-        const сardElement = createCard(initialCardsItem);
-        elementsContainer.addItem(сardElement);
-      },
+//создаем инстанс класса Section для отрисовывания карточек
+const elementsContainer = new Section(
+  ".elements__list",
+
+  {
+    renderer: (initialCardsItem) => {
+      const сardElement = createCard(initialCardsItem);
+      elementsContainer.addItem(сardElement);
     },
-    ".elements__list"
-  );
-  //и сразу отрисовываем
-  elementsContainer.renderItems();
-});
+  }
+);
+
+// api.getInitialCards().then((initialCardsFromServer) => {
+//   console.log(initialCardsFromServer);
+//   elementsContainer.renderItems(initialCardsFromServer);
+// });
+
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([userDataFromServer, initialCardsFromServer]) => {
+    userInfo.setUserInfo(userDataFromServer.name, userDataFromServer.about);
+    elementsContainer.renderItems(initialCardsFromServer);
+
+    return;
+  })
+  .catch((err) => {
+    console.log(`Ошибка: ${err}`);
+  });

@@ -1,20 +1,20 @@
 export class UserInfo {
-  constructor({ profileNameSelector, profileOccupationSelector }) {
+  constructor({ profileNameSelector, profileAboutSelector }) {
     this._profileName = document.querySelector(profileNameSelector);
-    this._profileOccupation = document.querySelector(profileOccupationSelector);
+    this._profileAbout = document.querySelector(profileAboutSelector);
   }
 
   getUserInfo() {
     const userData = {};
-    //"profileName" и "profileOccupation" прописаны в name инпутов попапа popup_type_profile
+    //"profileName" и "profileAbout" прописаны в name инпутов попапа popup_type_profile
     //чтобы связать с методом setInputValues класса PopupWithForm
     userData.profileName = this._profileName.textContent;
-    userData.profileOccupation = this._profileOccupation.textContent;
+    userData.profileAbout = this._profileAbout.textContent;
     return userData;
   }
 
-  setUserInfo(name, occupation) {
+  setUserInfo(name, about) {
     this._profileName.textContent = name;
-    this._profileOccupation.textContent = occupation;
+    this._profileAbout.textContent = about;
   }
 }

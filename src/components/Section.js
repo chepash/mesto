@@ -9,7 +9,11 @@ class Section {
     initialCardsFromServer.forEach((item) => this._renderer(item, myIdentificator));
   }
 
-  addItem(element) {
+  addItemAfterLastOne(element) {
+    this._container.append(element);
+  }
+
+  addItemBeforeFirstOne(element) {
     this._container.prepend(element);
   }
 }

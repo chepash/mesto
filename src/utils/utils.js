@@ -5,9 +5,12 @@ import {
   userInfo,
   profilePopupValidate,
   newCardPopupValidate,
+  confirmationPopup,
+  api,
 } from "../scripts/index.js";
 
 import { Card } from "../components/Card.js";
+import { apiOptions } from "./constants.js";
 
 //функция-обработчик клика по кнопке edit (открытие попапа редактирования профиля)
 export const handleProfileEditBtnClick = () => {
@@ -35,8 +38,31 @@ export const handleCardClick = (cardName, cardPicSrc) => {
   popupWithImage.open(cardName, cardPicSrc);
 };
 
+//функция-обработчик клика по кнопке удаления (открытие попапа подтверждения удаления карточки)
+const handleDeleteBtnClick = (cardId, deleteCurrentDomElement) => {
+  confirmationPopup.open();
+  confirmationPopup
+    .waitUntilClosed()
+    .then((isConfirmed) => {
+      if (isConfirmed) {
+        api.sendСardDeleteRequest(cardId).then(() => {
+          deleteCurrentDomElement();
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(`Ошибка: ${err}`);
+    });
+};
+
 //функция создания карточки(DOM-элемента) на основе класса
 export const createCard = (cardData, myIdentificator) => {
-  const сardInstance = new Card(cardData, ".template", handleCardClick, myIdentificator);
+  const сardInstance = new Card({
+    cardData: cardData,
+    templateSelector: ".template",
+    myIdentificator: myIdentificator,
+    handleCardClick: handleCardClick,
+    handleDeleteBtnClick: handleDeleteBtnClick,
+  });
   return сardInstance.createElementNode();
 };

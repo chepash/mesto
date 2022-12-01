@@ -17,9 +17,10 @@ import { FormValidator } from "../components/FormValidator.js";
 import { Section } from "../components/Section.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
+import { PopupWithConfirmation } from "../components/PopupWithConfirmation.js";
 import { UserInfo } from "../components/UserInfo.js";
 
-const api = new Api(apiOptions);
+export const api = new Api(apiOptions);
 
 export const userInfo = new UserInfo(userInfoConfig);
 
@@ -28,13 +29,13 @@ export const popupWithImage = new PopupWithImage(".popup_type_image");
 popupWithImage.setEventListeners();
 
 export const newCardPopup = new PopupWithForm(".popup_type_new-card", (inputsValues) => {
-  const newCardElement = createCard({
-    name: inputsValues["form__input_type_place-name"],
-    link: inputsValues["form__input_type_image-link"],
-  });
-  elementsContainer.addItem(newCardElement);
+  const pictureNameFromInput = inputsValues["form__input_type_place-name"];
+  const pictureLinkFromInput = inputsValues["form__input_type_image-link"];
 
-  newCardPopup.close();
+  api.sendNewCardInfo(pictureNameFromInput, pictureLinkFromInput).then((myNewCardDataFromServer) => {
+    const newCardElement = createCard(myNewCardDataFromServer, myNewCardDataFromServer.owner._id);
+    elementsContainer.addItemBeforeFirstOne(newCardElement);
+  });
 });
 newCardPopup.setEventListeners();
 
@@ -51,6 +52,9 @@ export const profilePopup = new PopupWithForm(".popup_type_profile", (inputsValu
     });
 });
 profilePopup.setEventListeners();
+
+export const confirmationPopup = new PopupWithConfirmation(".popup_type_confirmation");
+confirmationPopup.setEventListeners();
 
 //создаем инстансы класса валидации для попапов
 export const profilePopupValidate = new FormValidator(validationConfig, profilePopup.form);
@@ -69,7 +73,7 @@ const elementsContainer = new Section(
   {
     renderer: (initialCardsItem, myIdentificator) => {
       const сardElement = createCard(initialCardsItem, myIdentificator);
-      elementsContainer.addItem(сardElement);
+      elementsContainer.addItemAfterLastOne(сardElement);
     },
   },
   ".elements__list"

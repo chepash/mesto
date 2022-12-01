@@ -1,11 +1,12 @@
 export class Card {
-  constructor(cardData, templateSelector, handleCardClick, myIdentificator) {
-    this._cardData = cardData;
-    this._template = document.querySelector(templateSelector);
+  constructor(options) {
+    this._cardData = options.cardData;
+    this._template = document.querySelector(options.templateSelector);
 
-    this._myIdentificator = myIdentificator;
+    this._myIdentificator = options.myIdentificator;
 
-    this._handleCardClick = handleCardClick;
+    this._handleCardClick = options.handleCardClick;
+    this._handleDeleteBtnClick = options.handleDeleteBtnClick;
   }
 
   //метод-обработчик добавления like на карточке
@@ -13,13 +14,12 @@ export class Card {
     this._imageLikeBtn.classList.toggle("button_active");
   };
 
-  //метод удаления карточки
-  _handleDeleteCard = () => {
+  _deleteDomElement() {
     this._currentElement.remove();
     //При удалении экземпляра класса его дополнительно после удаления нужно занулять.
     //remove удаляет только разметку из html, сам объект карточки остается в памяти
     this._currentElement = null;
-  };
+  }
 
   _setEventListeners() {
     this._currentPicture.addEventListener("click", () =>
@@ -27,7 +27,9 @@ export class Card {
     );
 
     this._imageDeleteBtn = this._currentElement.querySelector(".button_type_delete");
-    this._imageDeleteBtn.addEventListener("click", this._handleDeleteCard);
+    this._imageDeleteBtn.addEventListener("click", () => {
+      this._handleDeleteBtnClick(this._cardData._id, this._deleteDomElement.bind(this));
+    });
 
     this._imageLikeBtn = this._currentElement.querySelector(".button_type_like");
     this._imageLikeBtn.addEventListener("click", this._handleLikeCard);

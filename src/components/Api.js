@@ -91,8 +91,64 @@ export class Api {
       });
   }
 
+  sendUserInfo(avatar) {
+    return fetch(`${this.baseUrl}/users/me/${avatar}`, {
+      method: "PATCH",
+      headers: {
+        authorization: this.authToken,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+
+        return Promise.reject(res.status);
+      })
+      .catch((err) => {
+        console.log(`Ошибка: ${err}`);
+      });
+  }
+
   sendСardDeleteRequest(cardId) {
     return fetch(`${this.baseUrl}/cards/${cardId}`, {
+      method: "DELETE",
+      headers: {
+        authorization: this.authToken,
+      },
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.ok;
+        }
+        return Promise.reject(res.status);
+      })
+      .catch((err) => {
+        console.log(`Ошибка api: ${err}`);
+      });
+  }
+
+  sendSetLikeRequest(cardId) {
+    return fetch(`${this.baseUrl}/cards/${cardId}/likes`, {
+      method: "PUT",
+      headers: {
+        authorization: this.authToken,
+      },
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(res.status);
+      })
+      .catch((err) => {
+        console.log(`Ошибка api: ${err}`);
+      });
+  }
+
+  sendRemoveLikeRequest(cardId) {
+    return fetch(`${this.baseUrl}/cards/${cardId}/likes`, {
       method: "DELETE",
       headers: {
         authorization: this.authToken,
@@ -105,7 +161,7 @@ export class Api {
         return Promise.reject(res.status);
       })
       .catch((err) => {
-        console.log(`Ошибка: ${err}`);
+        console.log(`Ошибка api: ${err}`);
       });
   }
 }

@@ -14,12 +14,18 @@
 
       <main class="content section section_size_narrow page__content">
         <section class="profile section content__section" aria-label="Профиль автора">
-          <img src="<%=require('./images/profile_pic.jpg')%>" alt="Картинка профиля" class="profile__avatar" />
+          <img
+            src="<%=require('./images/profile_pic.jpg')%>"
+            alt="Картинка профиля"
+            class="profile__avatar" />
 
           <div class="profile__info">
-            <p class="profile__name">Павел</p>
-            <p class="profile__about">Путешественник-любитель</p>
-            <button type="button" aria-label="Редактировать" class="button button_type_edit"></button>
+            <p class="profile__name">...</p>
+            <p class="profile__about">...</p>
+            <button
+              type="button"
+              aria-label="Редактировать"
+              class="button button_type_edit"></button>
           </div>
           <button type="button" class="button button_type_add"></button>
         </section>
@@ -37,8 +43,13 @@
     </div>
 
     <!-- popup редактирования профиля -->
-    <section class="popup section popup_type_profile" aria-label="Всплывающее окно: Редактирование профиля">
-      <button type="button" aria-label="Закрыть" class="button button_type_close popup__close"></button>
+    <section
+      class="popup section popup_type_profile"
+      aria-label="Всплывающее окно: Редактирование профиля">
+      <button
+        type="button"
+        aria-label="Закрыть"
+        class="button button_type_close popup__close"></button>
       <div class="popup__container">
         <form action="some_URL" method="get" class="form" name="profile-edit-form" novalidate>
           <h2 class="form__title">Редактировать профиль</h2>
@@ -75,10 +86,20 @@
     </section>
 
     <!-- popup подтверждения удаления -->
-    <section class="popup section popup_type_confirmation" aria-label="Всплывающее окно: Редактирование профиля">
-      <button type="button" aria-label="Закрыть" class="button button_type_close popup__close"></button>
+    <section
+      class="popup section popup_type_confirmation"
+      aria-label="Всплывающее окно: Редактирование профиля">
+      <button
+        type="button"
+        aria-label="Закрыть"
+        class="button button_type_close popup__close"></button>
       <div class="popup__container">
-        <form action="some_URL" method="get" class="form" name="delete-confirmation-form" novalidate>
+        <form
+          action="some_URL"
+          method="get"
+          class="form"
+          name="delete-confirmation-form"
+          novalidate>
           <h2 class="form__title">Вы уверены?</h2>
           <button type="submit" class="button button_type_submit">Да</button>
         </form>
@@ -86,8 +107,13 @@
     </section>
 
     <!-- popup добавления карточки -->
-    <section class="popup section popup_type_new-card" aria-label="Всплывающее окно: Добавление карточки">
-      <button type="button" aria-label="Закрыть" class="button button_type_close popup__close"></button>
+    <section
+      class="popup section popup_type_new-card"
+      aria-label="Всплывающее окно: Добавление карточки">
+      <button
+        type="button"
+        aria-label="Закрыть"
+        class="button button_type_close popup__close"></button>
       <div class="popup__container">
         <form action="some_URL" method="get" class="form" name="card-add-form" novalidate>
           <h2 class="form__title">Новое место</h2>
@@ -122,8 +148,13 @@
     </section>
 
     <!-- popup просмотра изображения -->
-    <section class="popup section popup_type_image" aria-label="Всплывающее окно: Просмотр карточки">
-      <button type="button" aria-label="Закрыть" class="button button_type_close popup__close"></button>
+    <section
+      class="popup section popup_type_image"
+      aria-label="Всплывающее окно: Просмотр карточки">
+      <button
+        type="button"
+        aria-label="Закрыть"
+        class="button button_type_close popup__close"></button>
       <figure class="popup__image-container">
         <img class="popup__image" src="#" alt="Название места" />
         <figcaption class="popup__image-caption">Название места</figcaption>

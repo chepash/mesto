@@ -10,7 +10,7 @@ import {
 } from "../scripts/index.js";
 
 import { Card } from "../components/Card.js";
-import { apiOptions } from "./constants.js";
+//import { apiOptions } from "./constants.js";
 
 //функция-обработчик клика по кнопке edit (открытие попапа редактирования профиля)
 export const handleProfileEditBtnClick = () => {
@@ -34,7 +34,7 @@ export const handleNewCardAddBtnClick = () => {
 };
 
 //функция-обработчик клика по картинке (открытие попапа просмотра картинки)
-export const handleCardClick = (cardName, cardPicSrc) => {
+export const handleOnCardClick = (cardName, cardPicSrc) => {
   popupWithImage.open(cardName, cardPicSrc);
 };
 
@@ -45,14 +45,39 @@ const handleDeleteBtnClick = (cardId, deleteCurrentDomElement) => {
     .waitUntilClosed()
     .then((isConfirmed) => {
       if (isConfirmed) {
-        api.sendСardDeleteRequest(cardId).then(() => {
-          deleteCurrentDomElement();
-        });
+        return api.sendСardDeleteRequest(cardId);
+      }
+      return Promise.reject(false);
+    })
+    .then((res) => {
+      if (res) {
+        deleteCurrentDomElement();
+        return;
       }
     })
-    .catch((err) => {
-      console.log(`Ошибка: ${err}`);
+    .catch((falseFromPopupClosed) => {
+      console.log(`${falseFromPopupClosed}: передумал удалять`);
     });
+};
+
+//метод-обработчик добавления like на карточке
+const handleLikeCard = (
+  cardIsLikedByMe,
+  cardId,
+  counterOfLikesElement,
+  setLikeBtnStateOfCurrentCard
+) => {
+  if (!cardIsLikedByMe) {
+    api.sendSetLikeRequest(cardId).then((CardDataFromServer) => {
+      setLikeBtnStateOfCurrentCard(true);
+      counterOfLikesElement.textContent = CardDataFromServer.likes.length;
+    });
+  } else {
+    api.sendRemoveLikeRequest(cardId).then((CardDataFromServer) => {
+      setLikeBtnStateOfCurrentCard(false);
+      counterOfLikesElement.textContent = CardDataFromServer.likes.length;
+    });
+  }
 };
 
 //функция создания карточки(DOM-элемента) на основе класса
@@ -61,8 +86,9 @@ export const createCard = (cardData, myIdentificator) => {
     cardData: cardData,
     templateSelector: ".template",
     myIdentificator: myIdentificator,
-    handleCardClick: handleCardClick,
+    handleOnCardClick: handleOnCardClick,
     handleDeleteBtnClick: handleDeleteBtnClick,
+    handleLikeCard: handleLikeCard,
   });
   return сardInstance.createElementNode();
 };

@@ -1,7 +1,6 @@
 import "../pages/index.css";
 
 import {
-  initialCards,
   validationConfig,
   userInfoConfig,
   profileEditBtn,
@@ -32,17 +31,22 @@ export const newCardPopup = new PopupWithForm(".popup_type_new-card", (inputsVal
   const pictureNameFromInput = inputsValues["form__input_type_place-name"];
   const pictureLinkFromInput = inputsValues["form__input_type_image-link"];
 
-  api.sendNewCardInfo(pictureNameFromInput, pictureLinkFromInput).then((myNewCardDataFromServer) => {
-    const newCardElement = createCard(myNewCardDataFromServer, myNewCardDataFromServer.owner._id);
-    elementsContainer.addItemBeforeFirstOne(newCardElement);
-  });
+  api
+    .sendNewCardInfo(pictureNameFromInput, pictureLinkFromInput)
+    .then((myNewCardDataFromServer) => {
+      const newCardElement = createCard(myNewCardDataFromServer, myNewCardDataFromServer.owner._id);
+      elementsContainer.addItemBeforeFirstOne(newCardElement);
+    });
 });
 newCardPopup.setEventListeners();
 
 export const profilePopup = new PopupWithForm(".popup_type_profile", (inputsValues) => {
   //отправляем данные на сервер и обновляем на странице
   api
-    .sendUserInfo(inputsValues["form__input_type_profile-name"], inputsValues["form__input_type_profile-about"])
+    .sendUserInfo(
+      inputsValues["form__input_type_profile-name"],
+      inputsValues["form__input_type_profile-about"]
+    )
     .then((res) => {
       userInfo.setUserInfo(
         inputsValues["form__input_type_profile-name"],
@@ -78,11 +82,6 @@ const elementsContainer = new Section(
   },
   ".elements__list"
 );
-
-// api.getInitialCards().then((initialCardsFromServer) => {
-//   console.log(initialCardsFromServer);
-//   elementsContainer.renderItems(initialCardsFromServer);
-// });
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([userDataFromServer, initialCardsFromServer]) => {

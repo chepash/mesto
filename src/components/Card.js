@@ -8,17 +8,13 @@ export class Card {
     this._handleOnCardClick = options.handleOnCardClick;
     this._handleDeleteBtnClick = options.handleDeleteBtnClick;
     this._handleLikeCard = options.handleLikeCard;
-
-    this._cardIsLikedByMe = false;
   }
 
   _setLikeBtnState(isLiked) {
     if (isLiked) {
-      console.log("поставили состояние кнопки Активное");
       this._currentCardLikeBtn.classList.add("button_active");
       this._cardIsLikedByMe = true;
     } else {
-      console.log("поставили состояние кнопки НЕ Активное");
       this._currentCardLikeBtn.classList.remove("button_active");
       this._cardIsLikedByMe = false;
     }
@@ -32,7 +28,7 @@ export class Card {
   }
 
   _setEventListeners() {
-    this._currentPicture.addEventListener("click", () =>
+    this._currentCardPicture.addEventListener("click", () =>
       this._handleOnCardClick(this._cardData.name, this._cardData.link)
     );
 
@@ -45,7 +41,7 @@ export class Card {
       this._handleLikeCard(
         this._cardIsLikedByMe,
         this._cardData._id,
-        this._currentLikeCounter,
+        this._currentCardLikeCounter,
         this._setLikeBtnState.bind(this)
       );
     });
@@ -55,15 +51,15 @@ export class Card {
   createElementNode() {
     this._currentElement = this._template.content.querySelector(".element").cloneNode(true);
 
-    this._currentName = this._currentElement.querySelector(".element__caption");
-    this._currentName.textContent = this._cardData.name;
+    this._currentCardName = this._currentElement.querySelector(".element__caption");
+    this._currentCardName.textContent = this._cardData.name;
 
-    this._currentPicture = this._currentElement.querySelector(".element__image");
-    this._currentPicture.alt = this._cardData.name;
-    this._currentPicture.src = this._cardData.link;
+    this._currentCardPicture = this._currentElement.querySelector(".element__image");
+    this._currentCardPicture.alt = this._cardData.name;
+    this._currentCardPicture.src = this._cardData.link;
 
-    this._currentLikeCounter = this._currentElement.querySelector(".element__like-count");
-    this._currentLikeCounter.textContent = this._cardData.likes.length;
+    this._currentCardLikeCounter = this._currentElement.querySelector(".element__like-count");
+    this._currentCardLikeCounter.textContent = this._cardData.likes.length;
 
     this._currentCardLikeBtn = this._currentElement.querySelector(".button_type_like");
 

@@ -1,8 +1,8 @@
 class Section {
-  constructor({ renderer }, containerSelector) {
-    this._renderer = renderer;
+  constructor(options) {
+    this._renderer = options.renderer;
 
-    this._container = document.querySelector(containerSelector);
+    this._container = document.querySelector(options.containerSelector);
   }
 
   renderItems(initialCardsFromServer, myIdentificator) {

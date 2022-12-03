@@ -14,10 +14,9 @@
 
       <main class="content section section_size_narrow page__content">
         <section class="profile section content__section" aria-label="Профиль автора">
-          <img
-            src="<%=require('./images/profile_pic.jpg')%>"
-            alt="Картинка профиля"
-            class="profile__avatar" />
+          <div class="profile__avatar-overlay">
+            <img src="..." alt="Картинка профиля" class="profile__avatar" />
+          </div>
 
           <div class="profile__info">
             <p class="profile__name">...</p>
@@ -147,6 +146,34 @@
       </div>
     </section>
 
+    <!-- popup редактирования аватара -->
+    <section
+      class="popup section popup_type_new-avatar"
+      aria-label="Всплывающее окно: Изменить аватар">
+      <button
+        type="button"
+        aria-label="Закрыть"
+        class="button button_type_close popup__close"></button>
+      <div class="popup__container">
+        <form action="some_URL" method="get" class="form" name="card-add-form" novalidate>
+          <h2 class="form__title">Обновить аватар</h2>
+          <div class="form__inputs-container">
+            <label class="form__input-wrap">
+              <input
+                type="url"
+                placeholder="Ссылка на картинку"
+                class="form__input form__input_type_avatar-link"
+                id="form__input_type_avatar-link"
+                name="placeAvatarLink"
+                required />
+              <span class="form__error" id="form__input_type_avatar-link-error"></span>
+            </label>
+          </div>
+          <button type="submit" class="button button_type_submit">Сохранить</button>
+        </form>
+      </div>
+    </section>
+
     <!-- popup просмотра изображения -->
     <section
       class="popup section popup_type_image"
@@ -161,7 +188,7 @@
       </figure>
     </section>
 
-    <template class="template">
+    <template class="template_type_card">
       <li class="element">
         <img src="#" alt="Альтернативный текст" class="element__image" />
         <button type="button" aria-label="Удалить" class="button button_type_delete"></button>

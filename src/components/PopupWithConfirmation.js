@@ -11,11 +11,19 @@ export class PopupWithConfirmation extends Popup {
     this._promise = null;
   }
 
+  renderLoading(isLoading) {
+    if (isLoading) {
+      this._submitButton.textContent = this._submitButton.textContent + "...";
+    } else if (!isLoading) {
+      this._submitButton.textContent = this._submitButton.textContent.slice(0, -3);
+    }
+  }
+
   _handleEscClose(e) {
     super._handleEscClose(e);
 
     if (this._promise !== null) {
-      this._resolve(false);
+      this._resolvePromise(false);
       this._promise = null;
     }
   }
@@ -24,7 +32,7 @@ export class PopupWithConfirmation extends Popup {
     super._handlePopubCloseBtnClick();
 
     if (this._promise !== null) {
-      this._resolve(false);
+      this._resolvePromise(false);
       this._promise = null;
     }
   }
@@ -32,7 +40,7 @@ export class PopupWithConfirmation extends Popup {
   _handlePopupOverlayClick(e) {
     if (e.currentTarget == e.target) {
       if (this._promise !== null) {
-        this._resolve(false);
+        this._resolvePromise(false);
         this._promise = null;
       }
       super.close();
@@ -41,19 +49,18 @@ export class PopupWithConfirmation extends Popup {
 
   _handleSubmitEvent(e) {
     e.preventDefault();
+    this.renderLoading(true);
 
     if (this._promise !== null) {
-      this._resolve(true);
+      this._resolvePromise(true);
       this._promise = null;
     }
-
-    super.close();
   }
 
   waitUntilClosed() {
     if (this._promise == null) {
       this._promise = new Promise((resolve, reject) => {
-        this._resolve = resolve;
+        this._resolvePromise = resolve;
       });
     }
     return this._promise;

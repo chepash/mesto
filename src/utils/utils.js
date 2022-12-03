@@ -10,7 +10,6 @@ import {
 } from "../scripts/index.js";
 
 import { Card } from "../components/Card.js";
-//import { apiOptions } from "./constants.js";
 
 //функция-обработчик клика по кнопке edit (открытие попапа редактирования профиля)
 export const handleProfileEditBtnClick = () => {
@@ -52,6 +51,8 @@ const handleDeleteBtnClick = (cardId, deleteCurrentDomElement) => {
     .then((res) => {
       if (res) {
         deleteCurrentDomElement();
+        confirmationPopup.renderLoading(false);
+        confirmationPopup.close();
         return;
       }
     })
@@ -62,29 +63,35 @@ const handleDeleteBtnClick = (cardId, deleteCurrentDomElement) => {
 
 //метод-обработчик добавления like на карточке
 const handleLikeCard = (
-  cardIsLikedByMe,
+  isCardAlreadyLikedByMe,
   cardId,
   counterOfLikesElement,
   setLikeBtnStateOfCurrentCard
 ) => {
-  if (!cardIsLikedByMe) {
-    api.sendSetLikeRequest(cardId).then((CardDataFromServer) => {
-      setLikeBtnStateOfCurrentCard(true);
-      counterOfLikesElement.textContent = CardDataFromServer.likes.length;
+  Promise.resolve()
+    .then(() => {
+      if (!isCardAlreadyLikedByMe) {
+        return api.sendSetLikeRequest(cardId).then((cardDataFromServer) => {
+          setLikeBtnStateOfCurrentCard(true);
+          return cardDataFromServer;
+        });
+      } else {
+        return api.sendRemoveLikeRequest(cardId).then((cardDataFromServer) => {
+          setLikeBtnStateOfCurrentCard(false);
+          return cardDataFromServer;
+        });
+      }
+    })
+    .then((cardDataFromServer) => {
+      counterOfLikesElement.textContent = cardDataFromServer.likes.length;
     });
-  } else {
-    api.sendRemoveLikeRequest(cardId).then((CardDataFromServer) => {
-      setLikeBtnStateOfCurrentCard(false);
-      counterOfLikesElement.textContent = CardDataFromServer.likes.length;
-    });
-  }
 };
 
 //функция создания карточки(DOM-элемента) на основе класса
 export const createCard = (cardData, myIdentificator) => {
   const сardInstance = new Card({
     cardData: cardData,
-    templateSelector: ".template",
+    templateSelector: ".template_type_card",
     myIdentificator: myIdentificator,
     handleOnCardClick: handleOnCardClick,
     handleDeleteBtnClick: handleDeleteBtnClick,

@@ -18,11 +18,8 @@ export class Api {
         return Promise.reject(res.status);
       })
       .catch((err) => {
-        console.log(`Ошибка: ${err}`);
+        console.log(`Ошибка api: ${err}`);
       });
-    // .finally((result) => {
-    //   console.log(result);
-    // });
   }
 
   getUserInfo() {
@@ -39,7 +36,7 @@ export class Api {
         return Promise.reject(res.status);
       })
       .catch((err) => {
-        console.log(`Ошибка: ${err}`);
+        console.log(`Ошибка api: ${err}`);
       });
   }
 
@@ -63,7 +60,7 @@ export class Api {
         return Promise.reject(res.status);
       })
       .catch((err) => {
-        console.log(`Ошибка: ${err}`);
+        console.log(`Ошибка api: ${err}`);
       });
   }
 
@@ -87,17 +84,20 @@ export class Api {
         return Promise.reject(res.status);
       })
       .catch((err) => {
-        console.log(`Ошибка: ${err}`);
+        console.log(`Ошибка api: ${err}`);
       });
   }
 
-  sendUserInfo(avatar) {
-    return fetch(`${this.baseUrl}/users/me/${avatar}`, {
+  sendUserAvatar(avatarUrl) {
+    return fetch(`${this.baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: {
         authorization: this.authToken,
         "Content-Type": "application/json",
       },
+      body: JSON.stringify({
+        avatar: avatarUrl,
+      }),
     })
       .then((res) => {
         if (res.ok) {
@@ -107,7 +107,7 @@ export class Api {
         return Promise.reject(res.status);
       })
       .catch((err) => {
-        console.log(`Ошибка: ${err}`);
+        console.log(`Ошибка api: ${err}`);
       });
   }
 

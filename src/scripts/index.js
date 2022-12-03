@@ -6,6 +6,7 @@ import {
   profileEditBtn,
   newCardAddBtn,
   apiOptions,
+  avatarOverlayEl,
 } from "../utils/constants.js";
 
 import { Api } from "../components/Api.js";
@@ -23,69 +24,99 @@ export const api = new Api(apiOptions);
 
 export const userInfo = new UserInfo(userInfoConfig);
 
-//создаём инстансы классов всех попапов и сразу вешаем слушатели на них
+//инстанс отвечающий за работу попапа просмотра картинки
 export const popupWithImage = new PopupWithImage(".popup_type_image");
 popupWithImage.setEventListeners();
 
+//инстанс отвечающий за работу попапа создания новой карточки
 export const newCardPopup = new PopupWithForm(".popup_type_new-card", (inputsValues) => {
   const pictureNameFromInput = inputsValues["form__input_type_place-name"];
   const pictureLinkFromInput = inputsValues["form__input_type_image-link"];
 
+  newCardPopup.renderLoading(true);
   api
     .sendNewCardInfo(pictureNameFromInput, pictureLinkFromInput)
     .then((myNewCardDataFromServer) => {
       const newCardElement = createCard(myNewCardDataFromServer, myNewCardDataFromServer.owner._id);
       elementsContainer.addItemBeforeFirstOne(newCardElement);
+      newCardPopup.renderLoading(false);
+      newCardPopup.close();
     });
 });
 newCardPopup.setEventListeners();
 
+//инстанс отвечающий за работу попапа редактирования аватарки
+const avatarEditPopup = new PopupWithForm(".popup_type_new-avatar", (inputsValues) => {
+  const newAvatarUrl = inputsValues["form__input_type_avatar-link"];
+  avatarEditPopup.renderLoading(true);
+  api.sendUserAvatar(newAvatarUrl).then((res) => {
+    userInfo.setUserAvatar(res.avatar);
+    avatarEditPopup.renderLoading(false);
+    avatarEditPopup.close();
+  });
+});
+avatarEditPopup.setEventListeners();
+
+//инстанс отвечающий за работу попапа редактирования данных о профиле
 export const profilePopup = new PopupWithForm(".popup_type_profile", (inputsValues) => {
-  //отправляем данные на сервер и обновляем на странице
+  profilePopup.renderLoading(true);
   api
     .sendUserInfo(
       inputsValues["form__input_type_profile-name"],
       inputsValues["form__input_type_profile-about"]
     )
-    .then((res) => {
-      userInfo.setUserInfo(
-        inputsValues["form__input_type_profile-name"],
-        inputsValues["form__input_type_profile-about"]
-      );
-      return res;
+    .then((userDataFromServer) => {
+      userInfo.setUserInfo(userDataFromServer.name, userDataFromServer.about);
+      profilePopup.renderLoading(false);
+      profilePopup.close();
+      return userDataFromServer;
     });
 });
 profilePopup.setEventListeners();
 
+//инстанс отвечающий за работу попапа подтверждения удаления карточки
 export const confirmationPopup = new PopupWithConfirmation(".popup_type_confirmation");
 confirmationPopup.setEventListeners();
 
-//создаем инстансы класса валидации для попапов
+//создаем инстансы класса валидации для попапов с формами
 export const profilePopupValidate = new FormValidator(validationConfig, profilePopup.form);
 export const newCardPopupValidate = new FormValidator(validationConfig, newCardPopup.form);
+export const newAvatarPopupValidate = new FormValidator(validationConfig, avatarEditPopup.form);
 
 //инициализация валидации(вешание слушателей по сути)
 profilePopupValidate.enableValidation();
 newCardPopupValidate.enableValidation();
+newAvatarPopupValidate.enableValidation();
 
-//вешаем слушатели на основные две кнопки на основной странице
+//вешаем слушатели на основные две кнопки + аватар на основной странице
 profileEditBtn.addEventListener("click", handleProfileEditBtnClick);
 newCardAddBtn.addEventListener("click", handleNewCardAddBtnClick);
+avatarOverlayEl.addEventListener("click", (e) => {
+  avatarEditPopup.open();
+});
 
 //создаем инстанс класса Section для отрисовывания карточек
-const elementsContainer = new Section(
-  {
-    renderer: (initialCardsItem, myIdentificator) => {
-      const сardElement = createCard(initialCardsItem, myIdentificator);
-      elementsContainer.addItemAfterLastOne(сardElement);
-    },
+const elementsContainer = new Section({
+  renderer: (initialCardsItem, myIdentificator) => {
+    const сardElement = createCard(initialCardsItem, myIdentificator);
+    elementsContainer.addItemAfterLastOne(сardElement);
   },
-  ".elements__list"
-);
+  containerSelector: ".elements__list",
+});
+
+//создаем инстанс класса Section для отрисовывания данных профиля
+const profileContainer = new Section({
+  renderer: (userDataFromServer) => {
+    const domElements = createProfileSection(userDataFromServer);
+    profileContainer.addItemAfterLastOne(domElements);
+  },
+  containerSelector: ".profile",
+});
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([userDataFromServer, initialCardsFromServer]) => {
     userInfo.setUserInfo(userDataFromServer.name, userDataFromServer.about);
+    userInfo.setUserAvatar(userDataFromServer.avatar);
     elementsContainer.renderItems(initialCardsFromServer, userDataFromServer._id);
 
     return userDataFromServer;

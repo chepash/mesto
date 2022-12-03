@@ -22,8 +22,10 @@ export const validationConfig = {
 export const userInfoConfig = {
   profileNameSelector: ".profile__name",
   profileAboutSelector: ".profile__about",
+  profileAvatarSelector: ".profile__avatar",
 };
 
 //находим кнопки на странице
 export const profileEditBtn = document.querySelector(".button_type_edit");
 export const newCardAddBtn = document.querySelector(".button_type_add");
+export const avatarOverlayEl = document.querySelector(".profile__avatar-overlay");

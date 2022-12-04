@@ -1,3 +1,5 @@
+import { bind } from "core-js/core/function";
+
 export class Card {
   constructor(options) {
     this._cardData = options.cardData;
@@ -10,14 +12,16 @@ export class Card {
     this._handleLikeCard = options.handleLikeCard;
   }
 
-  _setLikeBtnState(isLiked) {
+  _setLikeBtnStateWithCounts(isLiked, countsOfLikesFromServer) {
     if (isLiked) {
-      this._currentCardLikeBtn.classList.add("button_active");
       this._cardIsLikedByMe = true;
+      this._currentCardLikeBtn.classList.add("button_active");
     } else {
-      this._currentCardLikeBtn.classList.remove("button_active");
       this._cardIsLikedByMe = false;
+      this._currentCardLikeBtn.classList.remove("button_active");
     }
+
+    this._currentCardLikeCounterEl.textContent = countsOfLikesFromServer;
   }
 
   _deleteDomElement() {
@@ -41,8 +45,7 @@ export class Card {
       this._handleLikeCard(
         this._cardIsLikedByMe,
         this._cardData._id,
-        this._currentCardLikeCounter,
-        this._setLikeBtnState.bind(this)
+        this._setLikeBtnStateWithCounts.bind(this)
       );
     });
   }
@@ -58,16 +61,16 @@ export class Card {
     this._currentCardPicture.alt = this._cardData.name;
     this._currentCardPicture.src = this._cardData.link;
 
-    this._currentCardLikeCounter = this._currentElement.querySelector(".element__like-count");
-    this._currentCardLikeCounter.textContent = this._cardData.likes.length;
-
     this._currentCardLikeBtn = this._currentElement.querySelector(".button_type_like");
 
+    this._currentCardLikeCounterEl = this._currentElement.querySelector(".element__like-count");
     this._cardIsLikedByMe = this._cardData.likes.some((userData) => {
       return userData._id == this._myIdentificator;
     });
     if (this._cardIsLikedByMe) {
-      this._setLikeBtnState(true);
+      this._setLikeBtnStateWithCounts(true, this._cardData.likes.length);
+    } else {
+      this._setLikeBtnStateWithCounts(false, this._cardData.likes.length);
     }
 
     this._currentDeleteButton = this._currentElement.querySelector(".button_type_delete");

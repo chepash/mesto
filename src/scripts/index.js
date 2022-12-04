@@ -39,8 +39,13 @@ export const newCardPopup = new PopupWithForm(".popup_type_new-card", (inputsVal
     .then((myNewCardDataFromServer) => {
       const newCardElement = createCard(myNewCardDataFromServer, myNewCardDataFromServer.owner._id);
       elementsContainer.addItemBeforeFirstOne(newCardElement);
-      newCardPopup.renderLoading(false);
       newCardPopup.close();
+    })
+    .catch((err) => {
+      console.log(`Ошибка api: ${err}`);
+    })
+    .finally(() => {
+      newCardPopup.renderLoading(false);
     });
 });
 newCardPopup.setEventListeners();
@@ -49,11 +54,18 @@ newCardPopup.setEventListeners();
 const avatarEditPopup = new PopupWithForm(".popup_type_new-avatar", (inputsValues) => {
   const newAvatarUrl = inputsValues["form__input_type_avatar-link"];
   avatarEditPopup.renderLoading(true);
-  api.sendUserAvatar(newAvatarUrl).then((res) => {
-    userInfo.setUserAvatar(res.avatar);
-    avatarEditPopup.renderLoading(false);
-    avatarEditPopup.close();
-  });
+  api
+    .sendUserAvatar(newAvatarUrl)
+    .then((userDataFromServer) => {
+      userInfo.setUserAvatar(userDataFromServer.avatar);
+      avatarEditPopup.close();
+    })
+    .catch((err) => {
+      console.log(`Ошибка api: ${err}`);
+    })
+    .finally(() => {
+      avatarEditPopup.renderLoading(false);
+    });
 });
 avatarEditPopup.setEventListeners();
 
@@ -67,9 +79,14 @@ export const profilePopup = new PopupWithForm(".popup_type_profile", (inputsValu
     )
     .then((userDataFromServer) => {
       userInfo.setUserInfo(userDataFromServer.name, userDataFromServer.about);
-      profilePopup.renderLoading(false);
       profilePopup.close();
       return userDataFromServer;
+    })
+    .catch((err) => {
+      console.log(`Ошибка api: ${err}`);
+    })
+    .finally(() => {
+      profilePopup.renderLoading(false);
     });
 });
 profilePopup.setEventListeners();
@@ -93,6 +110,7 @@ profileEditBtn.addEventListener("click", handleProfileEditBtnClick);
 newCardAddBtn.addEventListener("click", handleNewCardAddBtnClick);
 avatarOverlayEl.addEventListener("click", (e) => {
   avatarEditPopup.open();
+  newAvatarPopupValidate.setSubmitBtnState();
 });
 
 //создаем инстанс класса Section для отрисовывания карточек
@@ -102,15 +120,6 @@ const elementsContainer = new Section({
     elementsContainer.addItemAfterLastOne(сardElement);
   },
   containerSelector: ".elements__list",
-});
-
-//создаем инстанс класса Section для отрисовывания данных профиля
-const profileContainer = new Section({
-  renderer: (userDataFromServer) => {
-    const domElements = createProfileSection(userDataFromServer);
-    profileContainer.addItemAfterLastOne(domElements);
-  },
-  containerSelector: ".profile",
 });
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])

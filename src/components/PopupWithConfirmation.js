@@ -8,14 +8,16 @@ export class PopupWithConfirmation extends Popup {
     this._closeButton = this._popup.querySelector(".button_type_close");
     this._submitButton = this._popup.querySelector(".button_type_submit");
 
+    this._submitButtonOriginalText = this._submitButton.textContent;
+
     this._promise = null;
   }
 
   renderLoading(isLoading) {
     if (isLoading) {
-      this._submitButton.textContent = this._submitButton.textContent + "...";
+      this._submitButton.textContent = "Сохранение...";
     } else if (!isLoading) {
-      this._submitButton.textContent = this._submitButton.textContent.slice(0, -3);
+      this._submitButton.textContent = this._submitButtonOriginalText;
     }
   }
 
@@ -49,7 +51,6 @@ export class PopupWithConfirmation extends Popup {
 
   _handleSubmitEvent(e) {
     e.preventDefault();
-    this.renderLoading(true);
 
     if (this._promise !== null) {
       this._resolvePromise(true);

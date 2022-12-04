@@ -4,22 +4,19 @@ export class Api {
     this.authToken = options.headers.authorization;
   }
 
+  _getResponseData(res) {
+    if (!res.ok) {
+      return Promise.reject(`Ошибка: ${res.status}`);
+    }
+    return res.json();
+  }
+
   getInitialCards() {
     return fetch(`${this.baseUrl}/cards`, {
       headers: {
         authorization: this.authToken,
       },
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        return Promise.reject(res.status);
-      })
-      .catch((err) => {
-        console.log(`Ошибка api: ${err}`);
-      });
+    }).then(this._getResponseData);
   }
 
   getUserInfo() {
@@ -27,17 +24,7 @@ export class Api {
       headers: {
         authorization: this.authToken,
       },
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        return Promise.reject(res.status);
-      })
-      .catch((err) => {
-        console.log(`Ошибка api: ${err}`);
-      });
+    }).then(this._getResponseData);
   }
 
   sendNewCardInfo(name, link) {
@@ -51,17 +38,7 @@ export class Api {
         name: name,
         link: link,
       }),
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        return Promise.reject(res.status);
-      })
-      .catch((err) => {
-        console.log(`Ошибка api: ${err}`);
-      });
+    }).then(this._getResponseData);
   }
 
   sendUserInfo(name, about) {
@@ -75,17 +52,7 @@ export class Api {
         name: name,
         about: about,
       }),
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        return Promise.reject(res.status);
-      })
-      .catch((err) => {
-        console.log(`Ошибка api: ${err}`);
-      });
+    }).then(this._getResponseData);
   }
 
   sendUserAvatar(avatarUrl) {
@@ -98,17 +65,7 @@ export class Api {
       body: JSON.stringify({
         avatar: avatarUrl,
       }),
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        return Promise.reject(res.status);
-      })
-      .catch((err) => {
-        console.log(`Ошибка api: ${err}`);
-      });
+    }).then(this._getResponseData);
   }
 
   sendСardDeleteRequest(cardId) {
@@ -117,16 +74,7 @@ export class Api {
       headers: {
         authorization: this.authToken,
       },
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.ok;
-        }
-        return Promise.reject(res.status);
-      })
-      .catch((err) => {
-        console.log(`Ошибка api: ${err}`);
-      });
+    }).then(this._getResponseData);
   }
 
   sendSetLikeRequest(cardId) {
@@ -135,16 +83,7 @@ export class Api {
       headers: {
         authorization: this.authToken,
       },
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(res.status);
-      })
-      .catch((err) => {
-        console.log(`Ошибка api: ${err}`);
-      });
+    }).then(this._getResponseData);
   }
 
   sendRemoveLikeRequest(cardId) {
@@ -153,15 +92,6 @@ export class Api {
       headers: {
         authorization: this.authToken,
       },
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(res.status);
-      })
-      .catch((err) => {
-        console.log(`Ошибка api: ${err}`);
-      });
+    }).then(this._getResponseData);
   }
 }

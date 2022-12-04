@@ -1,6 +1,10 @@
 export class Popup {
   constructor(popupSelector) {
     this._popup = document.querySelector(popupSelector);
+
+    //привязываем this только один раз в конструкторе, чтобы при удалении слушателя
+    //использовать точно такуюже ссылку на колбэк функцию
+    this._handleEscClose = this._handleEscClose.bind(this);
   }
 
   _handleEscClose(e) {
@@ -28,11 +32,11 @@ export class Popup {
 
   open() {
     this._popup.classList.add("popup_opened");
-    document.addEventListener("keydown", this._handleEscClose.bind(this)); //вешаем слушатель Esc
+    document.addEventListener("keydown", this._handleEscClose); //вешаем слушатель Esc. this здесь привязывать нельзя. bind(this) !== bind(this)
   }
 
   close() {
     this._popup.classList.remove("popup_opened");
-    document.removeEventListener("keydown", this._handleEscClose.bind(this)); //снимаем слушатель Esc
+    document.removeEventListener("keydown", this._handleEscClose); //снимаем слушатель Esc
   }
 }

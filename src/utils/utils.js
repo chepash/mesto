@@ -44,6 +44,7 @@ const handleDeleteBtnClick = (cardId, deleteCurrentDomElement) => {
     .waitUntilClosed()
     .then((isConfirmed) => {
       if (isConfirmed) {
+        confirmationPopup.renderLoading(true);
         return api.sendСardDeleteRequest(cardId);
       }
       return Promise.reject(false);
@@ -51,40 +52,39 @@ const handleDeleteBtnClick = (cardId, deleteCurrentDomElement) => {
     .then((res) => {
       if (res) {
         deleteCurrentDomElement();
-        confirmationPopup.renderLoading(false);
         confirmationPopup.close();
         return;
       }
     })
     .catch((falseFromPopupClosed) => {
       console.log(`${falseFromPopupClosed}: передумал удалять`);
+    })
+    .finally(() => {
+      confirmationPopup.renderLoading(false);
     });
 };
 
 //метод-обработчик добавления like на карточке
-const handleLikeCard = (
-  isCardAlreadyLikedByMe,
-  cardId,
-  counterOfLikesElement,
-  setLikeBtnStateOfCurrentCard
-) => {
-  Promise.resolve()
-    .then(() => {
-      if (!isCardAlreadyLikedByMe) {
-        return api.sendSetLikeRequest(cardId).then((cardDataFromServer) => {
-          setLikeBtnStateOfCurrentCard(true);
-          return cardDataFromServer;
-        });
-      } else {
-        return api.sendRemoveLikeRequest(cardId).then((cardDataFromServer) => {
-          setLikeBtnStateOfCurrentCard(false);
-          return cardDataFromServer;
-        });
-      }
-    })
-    .then((cardDataFromServer) => {
-      counterOfLikesElement.textContent = cardDataFromServer.likes.length;
-    });
+const handleLikeCard = (isCardAlreadyLikedByMe, cardId, setLikeBtnStateWithCounts) => {
+  if (!isCardAlreadyLikedByMe) {
+    api
+      .sendSetLikeRequest(cardId)
+      .then((cardDataFromServer) => {
+        setLikeBtnStateWithCounts(true, cardDataFromServer.likes.length);
+      })
+      .catch((err) => {
+        console.log(`Ошибка api: ${err}`);
+      });
+  } else {
+    api
+      .sendRemoveLikeRequest(cardId)
+      .then((cardDataFromServer) => {
+        setLikeBtnStateWithCounts(false, cardDataFromServer.likes.length);
+      })
+      .catch((err) => {
+        console.log(`Ошибка api: ${err}`);
+      });
+  }
 };
 
 //функция создания карточки(DOM-элемента) на основе класса

@@ -11,7 +11,12 @@ import {
 
 import { Api } from "../components/Api.js";
 
-import { handleProfileEditBtnClick, handleNewCardAddBtnClick, createCard } from "../utils/utils.js";
+import {
+  handleProfileEditBtnClick,
+  handleNewCardAddBtnClick,
+  createCard,
+  handleConfirm,
+} from "../utils/utils.js";
 
 import { FormValidator } from "../components/FormValidator.js";
 import { Section } from "../components/Section.js";
@@ -42,7 +47,7 @@ export const newCardPopup = new PopupWithForm(".popup_type_new-card", (inputsVal
       newCardPopup.close();
     })
     .catch((err) => {
-      console.log(`Ошибка api: ${err}`);
+      console.log(`Ошибка api sendNewCardInfo: ${err}`);
     })
     .finally(() => {
       newCardPopup.renderLoading(false);
@@ -61,7 +66,7 @@ const avatarEditPopup = new PopupWithForm(".popup_type_new-avatar", (inputsValue
       avatarEditPopup.close();
     })
     .catch((err) => {
-      console.log(`Ошибка api: ${err}`);
+      console.log(`Ошибка api sendUserAvatar: ${err}`);
     })
     .finally(() => {
       avatarEditPopup.renderLoading(false);
@@ -83,7 +88,7 @@ export const profilePopup = new PopupWithForm(".popup_type_profile", (inputsValu
       return userDataFromServer;
     })
     .catch((err) => {
-      console.log(`Ошибка api: ${err}`);
+      console.log(`Ошибка api sendUserInfo: ${err}`);
     })
     .finally(() => {
       profilePopup.renderLoading(false);
@@ -92,7 +97,10 @@ export const profilePopup = new PopupWithForm(".popup_type_profile", (inputsValu
 profilePopup.setEventListeners();
 
 //инстанс отвечающий за работу попапа подтверждения удаления карточки
-export const confirmationPopup = new PopupWithConfirmation(".popup_type_confirmation");
+export const confirmationPopup = new PopupWithConfirmation(
+  ".popup_type_confirmation",
+  handleConfirm
+);
 confirmationPopup.setEventListeners();
 
 //создаем инстансы класса валидации для попапов с формами
@@ -131,5 +139,5 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
     return userDataFromServer;
   })
   .catch((err) => {
-    console.log(`Ошибка: ${err}`);
+    console.log(`Ошибка api промиса из promise.all: ${err}`);
   });

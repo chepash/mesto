@@ -1,5 +1,3 @@
-import { bind } from "core-js/core/function";
-
 export class Card {
   constructor(options) {
     this._cardData = options.cardData;
@@ -36,8 +34,7 @@ export class Card {
       this._handleOnCardClick(this._cardData.name, this._cardData.link)
     );
 
-    this._imageDeleteBtn = this._currentElement.querySelector(".button_type_delete");
-    this._imageDeleteBtn.addEventListener("click", () => {
+    this._currentCardDeleteButton.addEventListener("click", () => {
       this._handleDeleteBtnClick(this._cardData._id, this._deleteDomElement.bind(this));
     });
 
@@ -73,9 +70,9 @@ export class Card {
       this._setLikeBtnStateWithCounts(false, this._cardData.likes.length);
     }
 
-    this._currentDeleteButton = this._currentElement.querySelector(".button_type_delete");
+    this._currentCardDeleteButton = this._currentElement.querySelector(".button_type_delete");
     if (this._cardData.owner._id !== this._myIdentificator) {
-      this._currentDeleteButton.classList.add("button_hidden");
+      this._currentCardDeleteButton.classList.add("button_hidden");
     }
 
     this._setEventListeners();

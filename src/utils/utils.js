@@ -40,15 +40,14 @@ export const handleOnCardClick = (cardName, cardPicSrc) => {
 //функция-обработчик клика по кнопке удаления (открытие попапа подтверждения удаления карточки)
 const handleDeleteBtnClick = (cardId, deleteCurrentDomElement) => {
   confirmationPopup.open();
-  confirmationPopup
-    .waitUntilClosed()
-    .then((isConfirmed) => {
-      if (isConfirmed) {
-        confirmationPopup.renderLoading(true);
-        return api.sendСardDeleteRequest(cardId);
-      }
-      return Promise.reject(false);
-    })
+  confirmationPopup.keepCurrentCardOptions(cardId, deleteCurrentDomElement);
+};
+
+//функция, отвечающая за последствия Подтверждения
+export const handleConfirm = (cardId, deleteCurrentDomElement) => {
+  confirmationPopup.renderLoading(true);
+  api
+    .sendСardDeleteRequest(cardId)
     .then((res) => {
       if (res) {
         deleteCurrentDomElement();
@@ -56,11 +55,12 @@ const handleDeleteBtnClick = (cardId, deleteCurrentDomElement) => {
         return;
       }
     })
-    .catch((falseFromPopupClosed) => {
-      console.log(`${falseFromPopupClosed}: передумал удалять`);
+    .catch((err) => {
+      console.log(`Ошибка api sendСardDeleteRequest: ${err}`);
     })
     .finally(() => {
       confirmationPopup.renderLoading(false);
+      confirmationPopup.deleteCurrentCardOptions();
     });
 };
 
@@ -73,7 +73,7 @@ const handleLikeCard = (isCardAlreadyLikedByMe, cardId, setLikeBtnStateWithCount
         setLikeBtnStateWithCounts(true, cardDataFromServer.likes.length);
       })
       .catch((err) => {
-        console.log(`Ошибка api: ${err}`);
+        console.log(`Ошибка api sendSetLikeRequest: ${err}`);
       });
   } else {
     api
@@ -82,7 +82,7 @@ const handleLikeCard = (isCardAlreadyLikedByMe, cardId, setLikeBtnStateWithCount
         setLikeBtnStateWithCounts(false, cardDataFromServer.likes.length);
       })
       .catch((err) => {
-        console.log(`Ошибка api: ${err}`);
+        console.log(`Ошибка api sendRemoveLikeRequest: ${err}`);
       });
   }
 };

@@ -13,7 +13,7 @@ export class PopupWithConfirmation extends Popup {
   renderLoading(isLoading) {
     if (isLoading) {
       this._submitButton.textContent = "Сохранение...";
-    } else if (!isLoading) {
+    } else {
       this._submitButton.textContent = this._submitButtonOriginalText;
     }
   }

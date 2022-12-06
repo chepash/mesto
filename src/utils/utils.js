@@ -48,12 +48,9 @@ export const handleConfirm = (cardId, deleteCurrentDomElement) => {
   confirmationPopup.renderLoading(true);
   api
     .sendСardDeleteRequest(cardId)
-    .then((res) => {
-      if (res) {
-        deleteCurrentDomElement();
-        confirmationPopup.close();
-        return;
-      }
+    .then(() => {
+      deleteCurrentDomElement();
+      confirmationPopup.close();
     })
     .catch((err) => {
       console.log(`Ошибка api sendСardDeleteRequest: ${err}`);

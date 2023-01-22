@@ -123,8 +123,8 @@ avatarOverlayEl.addEventListener("click", (e) => {
 
 //создаем инстанс класса Section для отрисовывания карточек
 const elementsContainer = new Section({
-  renderer: (initialCardsItem, myIdentificator) => {
-    const сardElement = createCard(initialCardsItem, myIdentificator);
+  renderer: (initialCardsItem, myId) => {
+    const сardElement = createCard(initialCardsItem, myId);
     elementsContainer.addItemAfterLastOne(сardElement);
   },
   containerSelector: ".elements__list",

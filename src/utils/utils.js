@@ -62,34 +62,23 @@ export const handleConfirm = (cardId, deleteCurrentDomElement) => {
 };
 
 //метод-обработчик добавления like на карточке
-const handleLikeCard = (isCardAlreadyLikedByMe, cardId, setLikeBtnStateWithCounts) => {
-  if (!isCardAlreadyLikedByMe) {
-    api
-      .sendSetLikeRequest(cardId)
-      .then((cardDataFromServer) => {
-        setLikeBtnStateWithCounts(true, cardDataFromServer.likes.length);
-      })
-      .catch((err) => {
-        console.log(`Ошибка api sendSetLikeRequest: ${err}`);
-      });
-  } else {
-    api
-      .sendRemoveLikeRequest(cardId)
-      .then((cardDataFromServer) => {
-        setLikeBtnStateWithCounts(false, cardDataFromServer.likes.length);
-      })
-      .catch((err) => {
-        console.log(`Ошибка api sendRemoveLikeRequest: ${err}`);
-      });
-  }
+const handleLikeCard = (isAlreadyLikedByMe, cardId, setLikeBtnStateWithCounts) => {
+  api
+    .changeLikeCardStatus(cardId, isAlreadyLikedByMe)
+    .then((cardDataFromServer) => {
+      setLikeBtnStateWithCounts(!isAlreadyLikedByMe, cardDataFromServer.likes.length);
+    })
+    .catch((err) => {
+      console.log(`Ошибка api changeLikeCardStatus: ${err}`);
+    });
 };
 
 //функция создания карточки(DOM-элемента) на основе класса
-export const createCard = (cardData, myIdentificator) => {
+export const createCard = (cardData, myId) => {
   const сardInstance = new Card({
     cardData: cardData,
     templateSelector: ".template_type_card",
-    myIdentificator: myIdentificator,
+    myId: myId,
     handleOnCardClick: handleOnCardClick,
     handleDeleteBtnClick: handleDeleteBtnClick,
     handleLikeCard: handleLikeCard,

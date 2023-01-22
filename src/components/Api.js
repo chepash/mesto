@@ -94,4 +94,13 @@ export class Api {
       },
     }).then(this._getResponseData);
   }
+
+  changeLikeCardStatus(cardId, isLikedByMe) {
+    return fetch(`${this.baseUrl}/cards/${cardId}/likes`, {
+      method: isLikedByMe ? "DELETE" : "PUT",
+      headers: {
+        authorization: this.authToken,
+      },
+    }).then(this._getResponseData);
+  }
 }

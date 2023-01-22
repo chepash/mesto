@@ -3,7 +3,7 @@ export class Card {
     this._cardData = options.cardData;
     this._template = document.querySelector(options.templateSelector);
 
-    this._myIdentificator = options.myIdentificator;
+    this._myId = options.myId;
 
     this._handleOnCardClick = options.handleOnCardClick;
     this._handleDeleteBtnClick = options.handleDeleteBtnClick;
@@ -12,10 +12,10 @@ export class Card {
 
   _setLikeBtnStateWithCounts(isLiked, countsOfLikesFromServer) {
     if (isLiked) {
-      this._cardIsLikedByMe = true;
+      this._isCardLikedByMe = true;
       this._currentCardLikeBtn.classList.add("button_active");
     } else {
-      this._cardIsLikedByMe = false;
+      this._isCardLikedByMe = false;
       this._currentCardLikeBtn.classList.remove("button_active");
     }
 
@@ -40,7 +40,7 @@ export class Card {
 
     this._currentCardLikeBtn.addEventListener("click", () => {
       this._handleLikeCard(
-        this._cardIsLikedByMe,
+        this._isCardLikedByMe,
         this._cardData._id,
         this._setLikeBtnStateWithCounts.bind(this)
       );
@@ -61,17 +61,17 @@ export class Card {
     this._currentCardLikeBtn = this._currentElement.querySelector(".button_type_like");
 
     this._currentCardLikeCounterEl = this._currentElement.querySelector(".element__like-count");
-    this._cardIsLikedByMe = this._cardData.likes.some((userData) => {
-      return userData._id == this._myIdentificator;
+    this._isCardLikedByMe = this._cardData.likes.some((userData) => {
+      return userData._id == this._myId;
     });
-    if (this._cardIsLikedByMe) {
+    if (this._isCardLikedByMe) {
       this._setLikeBtnStateWithCounts(true, this._cardData.likes.length);
     } else {
       this._setLikeBtnStateWithCounts(false, this._cardData.likes.length);
     }
 
     this._currentCardDeleteButton = this._currentElement.querySelector(".button_type_delete");
-    if (this._cardData.owner._id !== this._myIdentificator) {
+    if (this._cardData.owner._id !== this._myId) {
       this._currentCardDeleteButton.classList.add("button_hidden");
     }
 
